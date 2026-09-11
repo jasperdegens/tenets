@@ -1,7 +1,7 @@
 # tenets
 
 An engineering standard for coding agents, distilled from the canon and packaged as installable
-skills: **15 language-neutral rules behind a trigger-routing index, a language profile that binds
+skills: **16 language-neutral rules behind a trigger-routing index, a language profile that binds
 them to one ecosystem, one editable per-project file, six commands that apply the rules to real
 code, the primitives the TypeScript profile requires, and an eval suite** that measures whether
 agents actually load and follow the rules.
@@ -104,6 +104,7 @@ Each rule distills a respected source, keeping its teeth and recording every del
 | 13 Serverless Runtime | Instances are caches, never truth; waterfalls are the #1 perf bug; every cache entry has an invalidation story; retries are ambient so idempotency is mandatory; everything is bounded | twelve-factor, Well-Architected serverless practice |
 | 14 Planning | The plan is the contract stated before the code: boundary, API, error cases, invariants, tests, docs; examples become the test list; requirement before mechanism | Design by Contract, BDD example-first practice |
 | 15 Concurrent Change | Parallel work is partitioned by write set, not by task description; convergence points are named and made append-only, generated, or singly owned; a plan is re-derived after another change lands; if the split fights the structure, the structure is wrong | Conway 1968, Team Topologies (Skelton & Pais), trunk-based development (DORA), Parnas 1972 via Rule 7.10 |
+| 16 Remote Verification | Every claim of done carries the artifact that proves it — screenshots for visible change, a live URL for running behavior, gate output for logic — posted where the reviewer already looks; work is sliced to run green in a fresh remote session; a verification request is one message answerable with a tap from a phone | Continuous Delivery (Humble & Farley), preview-environment practice, genchi genbutsu (go and see) |
 
 Three structural properties hold the set together — the reasoning is in [design](docs/design.md):
 
@@ -185,7 +186,7 @@ authenticated `claude` CLI; runs cost real tokens.
 | Path | Contents |
 | --- | --- |
 | `skills/tenets/SKILL.md` | Routing index, loading protocol, guide and profile discovery |
-| `skills/tenets/rules/` | The 15 rule files |
+| `skills/tenets/rules/` | The 16 rule files |
 | `skills/tenets/profiles/` | Language profiles; `typescript.md` ships |
 | `skills/tenets/templates/` | Project-guide template (WHAT / WHY / QUALITY BAR per slot) |
 | `skills/tenets/workflow/` | Shared contracts for the workflow skills: findings, scope, checklists |

@@ -23,3 +23,11 @@
 - Are the convergence points this change touched append-only, generated, or singly owned? (15.2)
 - Was the plan re-derived against what actually landed, rather than replayed against stale state?
   (15.4)
+- Does every claim of done carry its matching artifact — screenshot or recording for visible change,
+  live URL for running behavior, gate output for logic — posted where the reviewer looks, never a
+  local path? (16.1)
+- Do screenshots cover before/after and every affected viewport and theme, with secrets and
+  personal data redacted? (16.2)
+- Does each live URL state the commit it serves, what to check, and when it expires? (16.3)
+- Could this slice run to green in a fresh remote session from documented commands, with anything
+  local-only named and isolated? (16.4)

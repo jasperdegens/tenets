@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+Remote verification.
+
+**Rule 16 Remote Verification** is new: work is overseen from wherever the reviewer is — a phone on
+any network, through any agent interface — never from a developer's machine. Every claim of done
+carries the artifact that proves it (a screenshot or recording for anything visible, a live URL for
+anything running, the gate's output for logic), posted where the reviewer already looks rather than
+as a local path; UI changes ship before/after captures per affected viewport and theme, taken with
+the harness's browser or a scripted one, as a human gate that never replaces behavioral tests; live
+URLs default to per-change preview environments and state the commit, the checks, and the expiry;
+work is sliced to run green in a fresh cloud session with state kept in pushed branches and PRs so
+any device or interface can resume it; and a verification request is one message answerable with a
+tap. The project guide's Change delivery slot gains the verification surfaces (preview platform, URL
+patterns, screenshot tool, where evidence is posted); dimension 6 of the review checklist gains four
+questions; two routing scenarios cover the new row. Ruleset index at 2.2.0.
+
 ## 0.5.0 — 2026-09-04
 
 Concurrent change, and decomposition for locality.
