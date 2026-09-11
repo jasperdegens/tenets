@@ -38,11 +38,11 @@ never a distributed transaction by accident.
 
 Schema changes use expand–contract: add the new shape, migrate readers/writers, backfill, verify,
 then contract. Deploys overlap versions, so every migration is compatible with the previous release
-(n−1). Backfills are resumable, idempotent, bounded jobs (Rule 03.3); destructive steps ship
+(n−1). Backfills are resumable, idempotent, bounded jobs (Rule 3.3); destructive steps ship
 separately from the changes that depend on them, and only after verification.
 
 ## 12.6 Ownership
 
-One workspace owns each table or collection; others go through its API, never the storage (Rule 07.4
-extended to persistence). Schema changes belong to the owner and follow Rule 07.5's canonical-state
+One workspace owns each table or collection; others go through its API, never the storage (Rule 7.4
+extended to persistence). Schema changes belong to the owner and follow Rule 7.5's canonical-state
 discipline.

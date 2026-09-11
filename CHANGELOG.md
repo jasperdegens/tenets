@@ -10,6 +10,15 @@ callers invoke, domain vocabulary, no provider types, one contract test) and nam
 signals. Rule 1.2's "one clear boundary benefit" now points at it, the index row and Dimension 2
 checklist carry it, and routing scenario R20 expects it.
 
+**Streamlined rules.** Every rule file was rewritten for density without renumbering or removing an
+anchor: each fact now lives in one section and the others cite it. Rule 2.6 points at 4.3's test
+list instead of repeating it; 2.5 keeps the five-line decision flow and drops the adapter
+translation that 2.3 and the profile already own; 1.4 defers the pre-code contract to 14.1; 14.3
+and 14.5 cite 4.2 and 10.6 rather than restating them; 5.5 absorbs 6.4's stale-docs sweep; 7.x and
+10.x lose their repeated adapter and provider sentences. Anchor citations inside the rules drop the
+zero padding (`Rule 2.1`, not `Rule 02.1`). The set goes from ~7,050 to ~5,950 words; every anchor
+cited from a checklist, skill, profile, or doc still resolves.
+
 ## 0.5.0 — 2026-09-04
 
 Concurrent change, and decomposition for locality.

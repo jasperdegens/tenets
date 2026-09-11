@@ -1,7 +1,7 @@
 # 01 Coding Philosophy
 
-Functional-first, immutable, contract-driven code. Optimize for correctness, reviewability,
-and agent legibility before speed.
+Functional-first, immutable, contract-driven code. Optimize for correctness, reviewability, and
+agent legibility before speed.
 
 ## 1.1 Non-Negotiables
 
@@ -27,25 +27,22 @@ Rule 10 governs larger architecture and tooling decisions.
 Every public function, package boundary, adapter boundary, and workflow step has a contract:
 **preconditions** (schema parse, type signature, or invariant), **postconditions** (returned values,
 typed errors, persisted state, side effects, immutability promises), and **invariants** (facts that
-stay true after success). Enforce contracts at both ends where cheap (Rule 02.2, the airlock).
-
-Schemas own untrusted runtime boundaries; derive static types from the schema so runtime and
-compile-time contracts cannot drift.
+stay true after success). Enforce contracts at both ends where cheap (Rule 2.2, the airlock).
+Schemas own untrusted runtime boundaries; derive static types from the schema so the two cannot
+drift.
 
 ## 1.4 Deep and Legible Code
 
-Before implementing, name the boundary, public API, inputs, outputs, error cases, invariants, tests,
-and docs to update; non-trivial work uses the implementation-plan template the project guide names.
-
-Make invalid states unrepresentable: discriminated unions, branded IDs, schemas, narrow public
-types. Export a purpose-built DTO, not the internal domain model. Prefer predictable structure over
-cleverness — readers should find validation, core logic, tests, and docs without guessing.
+State the contract before the code (Rule 14.1). Make invalid states unrepresentable: discriminated
+unions, branded IDs, schemas, narrow public types. Export a purpose-built DTO, not the internal
+domain model. Prefer predictable structure over cleverness — readers should find validation, core
+logic, tests, and docs without guessing.
 
 ## 1.5 Clean Deletion
 
 Replacing code removes the old path completely unless a migration period is explicitly required. No
 `V2` names, deprecated shadows, speculative modules, or README stubs unless the task requires them.
-Scaffold placeholders exist only before behavior does, and must say they are placeholders.
+Scaffold placeholders exist only before behavior does, and must say so.
 
 ## 1.6 Earning an Abstraction
 
