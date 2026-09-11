@@ -1,4 +1,4 @@
-# Dimension 2 — Structure and API depth (Rules 03, 07)
+# Dimension 2 — Structure and API depth (Rules 03, 07; 1.6)
 
 - Is the module's public surface smaller than its hidden implementation, and does it hide a volatile
   decision rather than expose sequencing? (3.6)
@@ -27,3 +27,7 @@
 - Does any module import a sibling capability's unpublished files? (7.2 at module granularity, 7.10)
 - Is a family of implementations exposed through one port with composition at the consumer, rather
   than a broad aggregator re-exporting every implementation? (7.10, 7.1, 7.3)
+- Is each new port, adapter, or interface earned by a volatile decision, a real second
+  implementation, or a test double for an external system — never a hypothetical one? (1.6)
+- Does any interface mirror its only implementation method for method, or does a shared helper carry
+  flags that encode which caller it serves? (1.6)
