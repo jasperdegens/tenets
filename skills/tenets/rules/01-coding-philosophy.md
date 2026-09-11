@@ -17,7 +17,7 @@ and agent legibility before speed.
 
 1. **YAGNI:** no speculative extension points.
 2. **KISS:** the simplest design that preserves the contract.
-3. **DRY:** abstract after three real repetitions or one clear boundary benefit.
+3. **DRY:** abstract after three real repetitions, or earlier only when Rule 1.6 earns the boundary.
 4. **SOLID/principles:** only when they reduce real complexity.
 
 Rule 10 governs larger architecture and tooling decisions.
@@ -46,3 +46,14 @@ cleverness — readers should find validation, core logic, tests, and docs witho
 Replacing code removes the old path completely unless a migration period is explicitly required. No
 `V2` names, deprecated shadows, speculative modules, or README stubs unless the task requires them.
 Scaffold placeholders exist only before behavior does, and must say they are placeholders.
+
+## 1.6 Earning an Abstraction
+
+Introduce a port, adapter, or interface only when the decision behind it is volatile (Rule 3.6),
+when a real second implementation exists (Rule 7.10), or when a test double must stand in for an
+external system at that seam. One production implementation plus a fake earns the port; a
+hypothetical second one does not. Keep it light: only the operations callers invoke, in the domain's
+vocabulary, no provider types crossing it (Rule 10.5), proven by one contract test (Rule 4.4).
+Collapse an interface that mirrors its only implementation method for method, and split a shared
+helper that grows flags to serve divergent callers — duplication is cheaper than the wrong
+abstraction.

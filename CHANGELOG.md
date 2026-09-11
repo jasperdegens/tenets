@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+**Rule 1.6 Earning an Abstraction** appends the decision the set had scattered across Rules 3.6,
+7.10 and 10.5: a port, adapter, or interface is earned by a volatile decision, a real second
+implementation, or a test double standing in for an external system — one production implementation
+plus a fake qualifies, a hypothetical second one does not. It fixes the shape (only the operations
+callers invoke, domain vocabulary, no provider types, one contract test) and names the collapse
+signals. Rule 1.2's "one clear boundary benefit" now points at it, the index row and Dimension 2
+checklist carry it, and routing scenario R20 expects it.
+
 ## 0.5.0 — 2026-09-04
 
 Concurrent change, and decomposition for locality.

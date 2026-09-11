@@ -57,7 +57,7 @@ new sections append, existing ones never renumber.
 
 | Rule                                                            | Read when                                                                                                      |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [01 Coding Philosophy](rules/01-coding-philosophy.md)           | planning any implementation; tempted by speculative abstractions, `V2` shadows, or leaving replaced paths      |
+| [01 Coding Philosophy](rules/01-coding-philosophy.md)           | planning any implementation; deciding whether a port or adapter is earned; tempted by speculative abstractions, `V2` shadows, or leaving replaced paths |
 | [02 Error Handling](rules/02-error-handling.md)                 | code can fail: boundary input, Result vs invariant vs throw, writing a `catch`, wrapping a throwing dependency |
 | [03 Function Design](rules/03-function-design.md)               | long or nested bodies, loops over unbounded input, a module's public surface, `.andThen()` chains              |
 | [04 Testing](rules/04-testing.md)                               | any behavior change — tests precede it; choosing a test level; factories, mocks, validation gates              |
