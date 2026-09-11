@@ -73,7 +73,7 @@ new sections append, existing ones never renumber.
 | [13 Serverless Runtime](rules/13-serverless-runtime.md)         | request handlers, fetch sequences, cache layers, queue/webhook consumers, long-running jobs                    |
 | [14 Planning](rules/14-planning.md)                             | before non-trivial work: naming the boundary, contract, examples, and slices; a request that names a mechanism |
 | [15 Concurrent Change](rules/15-concurrent-change.md)           | splitting work across agents or worktrees; two changes in flight over one area; a plan that may have gone stale |
-| [16 Remote Verification](rules/16-remote-verification.md)       | reporting work as done or asking for QA; any visible UI/UX change; a push that lands somewhere live; planning where work will run |
+| [16 Remote Verification](rules/16-remote-verification.md)       | reporting work as done or asking for QA; any visible UI/UX change; a push that lands somewhere live; work that cannot run remotely |
 
 Rules 01–02 apply to nearly all code work; the rest load on trigger.
 

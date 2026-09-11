@@ -5,17 +5,17 @@
 Remote verification.
 
 **Rule 16 Remote Verification** is new: work is overseen from wherever the reviewer is — a phone on
-any network, through any agent interface — never from a developer's machine. Every claim of done
-carries the artifact that proves it (a screenshot or recording for anything visible, a live URL for
-anything running, the gate's output for logic), posted where the reviewer already looks rather than
-as a local path; UI changes ship before/after captures per affected viewport and theme, taken with
-the harness's browser or a scripted one, as a human gate that never replaces behavioral tests; live
-URLs default to per-change preview environments and state the commit, the checks, and the expiry;
-work is sliced to run green in a fresh cloud session with state kept in pushed branches and PRs so
-any device or interface can resume it; and a verification request is one message answerable with a
-tap. The project guide's Change delivery slot gains the verification surfaces (preview platform, URL
-patterns, screenshot tool, where evidence is posted); dimension 6 of the review checklist gains four
-questions; two routing scenarios cover the new row. Ruleset index at 2.2.0.
+any network, through any agent interface — so verifying it never depends on a local environment.
+Evidence is owed where a human eye is the check, not on every change: a screenshot of the result
+for anything visible (taken with the harness's browser or a scripted one, recordings only on
+request), the URL the reviewer can open for anything running, including every push that lands
+somewhere live. Evidence is posted where the reviewer already looks with the question it answers
+beside it, never as a local path; failures are shown the same way. Work that cannot run in the
+provisioned remote environment is flagged in the plan and report rather than silently pushed back
+to a local machine. The screenshot is a human gate for design intent and never replaces behavioral
+tests. The project guide's Change delivery slot gains the verification surfaces (preview platform,
+URL patterns, screenshot tool, where evidence is posted); dimension 6 of the review checklist gains
+four questions; two routing scenarios cover the new row. Ruleset index at 2.2.0.
 
 ## 0.5.0 — 2026-09-04
 
