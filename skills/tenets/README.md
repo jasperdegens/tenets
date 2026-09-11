@@ -1,7 +1,7 @@
 # tenets
 
 A generic, distilled engineering ruleset for monorepos, packaged as an agent skill: 15
-language-neutral rules (~7,000 words) behind a trigger-routing index, a language profile that binds
+language-neutral rules (~6,000 words) behind a trigger-routing index, a language profile that binds
 them to one ecosystem, one editable per-project translation file (the project guide), and two
 commands to create and audit it.
 

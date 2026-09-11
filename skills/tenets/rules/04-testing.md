@@ -6,55 +6,44 @@ side-effectful boundaries.
 
 ## 4.1 Required Shape
 
-Declare tests with the runner's explicit declaration form (the profile shows it): name the unit
-under test, name the observable behavior the caller sees, carry the example in Given/When/Then
-comments, and assert the expected throw/rejection message — not merely that something threw.
+Use the runner's explicit declaration form (the profile shows it): name the unit under test, name
+the observable behavior, carry the example in Given/When/Then comments, and assert the expected
+rejection message — not merely that something threw.
 
 ## 4.2 Behavioral TDD Loop
 
-Before the first test, derive concrete examples from the product requirement: one per business rule
-plus the boundary cases where it bends. The example list becomes the test list, named in domain
-language (Rule 7.9); a requirement with no expressible example is not yet understood.
+Derive concrete examples from the requirement — one per business rule plus the boundary cases where
+it bends — named in domain language (Rule 7.9). The example list is the test list; an example with
+no expressible assertion means the requirement is not yet understood.
 
-Start at the smallest boundary that would fail without the behavior — public contracts when clear,
-internal seams when they own meaningful behavior. A red test counts only when it fails for the
-expected contract reason, not setup noise.
-
-1. **Red:** add or update a behavioral test at the smallest useful boundary.
+1. **Red:** a behavioral test at the smallest boundary that would fail without the behavior —
+   public contracts when clear, internal seams when they own meaningful behavior. It counts only
+   when it fails for the contract reason, not setup noise.
 2. **Green:** the smallest code that satisfies the contract.
 3. **Refactor:** simplify names, modules, duplication — only while green.
 
-Never refactor before proving behavior.
-
 ## 4.3 Coverage Rules
 
-Coverage is feedback, never a target or gate (Rule 11.3). Deliberate calibration: test-per-function
-mandates serve safety-critical infrastructure; a web application earns nothing from tests written to
-satisfy a number, and fake tests rot trust.
+Coverage is feedback, never a target or gate (Rule 11.3) — a deliberate calibration away from
+safety-critical test-per-function mandates; tests written to satisfy a number rot trust.
 
-Every behavior change covers: happy path; every documented `Result` error type; schema rejection at
-the boundary; invariant throws where they exist; observable postconditions (persisted state, emitted
-events, cleanup/preservation, immutability); and, when touched, authentication, authorization,
-resource cleanup, external mutations, policy decisions.
+Every behavior change covers the happy path, every documented `Result` error type, schema rejection
+at the boundary, invariant throws where they exist, and observable postconditions (persisted state,
+emitted events, cleanup, immutability); plus, when touched, authentication, authorization, resource
+cleanup, external mutations, and policy decisions.
 
 ## 4.4 Boundaries and Contracts
 
-Test boundaries, invariants, and observable effects. Prefer public APIs — package exports, HTTP
-routes, RPC/tool schemas, CLI output/exit, SDK methods, adapter contracts. Narrower internal seams
-are valid when they own parsing, normalization, idempotency, retry math, or state transitions, but
-must still prove observable behavior or a domain invariant; Rule 07.2's internal-import ban applies to
-tests too.
+Test through public APIs — package exports, routes, RPC/tool schemas, CLI output, SDK methods,
+adapter contracts. An internal seam is a valid subject when it owns parsing, normalization,
+idempotency, retry math, or state transitions, and it still proves observable behavior; Rule 7.2's
+internal-import ban applies to tests.
 
-Adapters share contract tests over normalized interfaces; interchangeable providers each run the
-same contract for their roles — never an E2E provider cross-product. Interfaces that hide sequencing
-get contract tests for success and caller-observable failures; tests must not know helper counts,
-call order, or cache internals.
-
-Unit tests cannot prove external behavior: anything depending on another process, service, or
-resource needs a focused integration: fakes prove routing logic, but proving an external CLI
-performs the operation takes an integration or live profile. For state machines, queues, and
-idempotency keys, test invariants across states: repeated cycles must not duplicate active work;
-in-progress user data stays preserved.
+Interchangeable adapters each run one shared contract test — never an E2E provider cross-product.
+Tests of an interface that hides sequencing assert success and caller-observable failure, never
+helper counts, call order, or cache internals. For state machines, queues, and idempotency keys,
+test invariants across states: repeated cycles do not duplicate active work; in-progress data
+survives.
 
 ## 4.5 Test Data
 
@@ -65,29 +54,27 @@ of an external protocol when collaborator tests plus one real integration prove 
 
 ## 4.6 Organization and Levels
 
-Tests live with the owning workspace; the outer name is the public unit
-(`CatalogService.search`), the inner name is observable behavior. The project guide owns locations, filename patterns, runners, and
-selection.
-
-Use the lowest level that proves the contract:
+Tests live with the owning workspace; the outer name is the public unit (`CatalogService.search`),
+the inner name is observable behavior. The project guide owns locations, patterns, runners, and
+selection. Use the lowest level that proves the contract:
 
 - **Unit:** pure contracts, parsing, state transitions, typed errors; never touches live services.
 - **Local integration:** one real local boundary or resource lifecycle.
-- **Live integration:** one real remote boundary and its cleanup contract.
-- **E2E:** a complete user journey; live services only when required.
-
-When E2E exposes a stable boundary contract, move it down and keep at most one full-journey proof.
+- **Live integration:** one real remote boundary and its cleanup contract — fakes prove routing
+  logic; only a real run proves the external side.
+- **E2E:** one full-journey proof; when it exposes a stable boundary contract, move it down.
 
 ## 4.7 Prohibitions
 
 - No tests that only prove exports exist, or that pass when the implementation is a no-op.
 - No snapshots as a substitute for behavioral assertions.
 - No asserting private helper call order unless it is part of the public contract.
-- No deleting or weakening tests to fit a change unless the contract changes and docs are updated.
+- No deleting or weakening a test to fit a change (Rule 10.2) unless the contract changed and the
+  docs say so.
 
 ## 4.8 Release Gates
 
 Routine validation is affected-aware and cacheable; release gates rerun the full suite without
-trusting prior cache. A selected test fails when prerequisites are incomplete — it never hides
-behind a skip. Scoped runs are debugging tools, not completion evidence; when full validation is
-unavailable, record what was omitted and why. The project guide owns phase commands.
+trusting cache. A selected test fails when prerequisites are missing — never a skip. Scoped runs are
+debugging tools, not completion evidence: record what was omitted and why. The project guide owns
+phase commands.
