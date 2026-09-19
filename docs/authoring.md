@@ -13,7 +13,7 @@ Rules are the standard itself, so the bar is high and the mechanics are strict.
 - **Stay language-neutral.** Name the result type, the invariant assertion, and the doc, test, and
   packaging systems generically; the profile fixes concrete names. A rule mentioning `describe`,
   `package.json`, or `@ts-ignore` belongs in a profile.
-- **Keep it dense.** Rules total roughly 6,300 words across fourteen files for a reason. New prose
+- **Keep it dense.** Rules total roughly 8,000 words across sixteen files for a reason. New prose
   earns its place by changing what an agent does, not by explaining what it already inferred.
 - **Record calibrations.** If the rule deliberately departs from its source, say so and say why in
   the rule itself.

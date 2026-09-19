@@ -7,3 +7,4 @@ A04	07	Which compiler strictness settings does this repository's ruleset make no
 A05	02	A payments SDK throws on network failure. Show how this repository's rules say to translate that at the adapter boundary. Include the code.	InvariantError
 A06	05	Document an exported function that returns a Result and asserts an invariant, following this repository's rules. Show the documentation.	@throws|@remarks|/\*\*
 A07	07	I need to expose a formatDate function from an existing lib as a new public entry point. Per this repository's rules, what exactly changes?	exports
+A08	16	A user reported that exporting an invoice with no line items failed last night; my fix makes the total zero. Write the pull request body following this repository's rules.	What was reported|Still open|Verified locally

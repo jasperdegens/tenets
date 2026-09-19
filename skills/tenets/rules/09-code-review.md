@@ -12,14 +12,16 @@ Review behavior, contracts, safety, tests, and docs. Findings first; summaries s
 - an internal import across a workspace boundary; app wrapper containing business orchestration,
 - credential/secret leakage, isolation or privilege escape, data-loss, or unauthorized external
   mutation risk,
-- unauthorized dependency/root-config/package change; failing required check.
+- unauthorized dependency/root-config/package change; failing required check,
+- a change write-up that claims a check it did not run (Rule 16.7).
 
 **REQUIRED CHANGES** — fix before merge:
 
 - missing behavioral tests for changed behavior or a documented `Result` error type,
 - missing or junk documentation on exports; missing file preamble,
 - package README, topic page, work artifact, or project guide made stale by the change,
-- shallow public API/export leaking implementation sequencing.
+- shallow public API/export leaking implementation sequencing,
+- a change write-up missing a Rule 16.5 section, or a required check left unrun (Rule 16.7).
 
 **SUGGESTION** — non-blocking: naming, extra edge tests, deeper `@remarks`, simplification,
 out-of-scope refactors.
@@ -39,6 +41,8 @@ out-of-scope refactors.
 - Auth, cleanup, external mutations, and policy effects tested when touched?
 - Docs, README, topic page, or ADR updated as needed?
 - The project's standard commands used (project guide)?
+- Does the write-up stand alone — reported symptom, cause, change, tests that fail without it, what
+  was run and not run (Rule 16.5)?
 
 ## 9.3 Feedback Format
 
