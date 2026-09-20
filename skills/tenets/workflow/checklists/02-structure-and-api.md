@@ -27,7 +27,8 @@
 - Does any module import a sibling capability's unpublished files? (7.2 at module granularity, 7.10)
 - Is a family of implementations exposed through one port with composition at the consumer, rather
   than a broad aggregator re-exporting every implementation? (7.10, 7.1, 7.3)
-- Is each new port, adapter, or interface earned by a volatile decision, a real second
-  implementation, or a test double for an external system — never a hypothetical one? (1.6)
-- Does any interface mirror its only implementation method for method, or does a shared helper carry
-  flags that encode which caller it serves? (1.6)
+- Is each new interface justified by an implementation likely to change, a second real
+  implementation, or a test fake for an external system — not by a second implementation that might
+  exist someday? (1.6)
+- Does any interface have exactly one implementation and repeat its methods one for one, or does a
+  shared helper take flags that say which caller it serves? (1.6)

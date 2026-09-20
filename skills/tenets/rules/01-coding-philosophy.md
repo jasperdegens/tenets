@@ -17,7 +17,7 @@ and agent legibility before speed.
 
 1. **YAGNI:** no speculative extension points.
 2. **KISS:** the simplest design that preserves the contract.
-3. **DRY:** abstract after three real repetitions, or earlier only when Rule 1.6 earns the boundary.
+3. **DRY:** abstract after three real repetitions, or earlier only when Rule 1.6 justifies it.
 4. **SOLID/principles:** only when they reduce real complexity.
 
 Rule 10 governs larger architecture and tooling decisions.
@@ -49,11 +49,11 @@ Scaffold placeholders exist only before behavior does, and must say they are pla
 
 ## 1.6 Earning an Abstraction
 
-Introduce a port, adapter, or interface only when the decision behind it is volatile (Rule 3.6),
-when a real second implementation exists (Rule 7.10), or when a test double must stand in for an
-external system at that seam. One production implementation plus a fake earns the port; a
-hypothetical second one does not. Keep it light: only the operations callers invoke, in the domain's
-vocabulary, no provider types crossing it (Rule 10.5), proven by one contract test (Rule 4.4).
-Collapse an interface that mirrors its only implementation method for method, and split a shared
-helper that grows flags to serve divergent callers — duplication is cheaper than the wrong
-abstraction.
+Introduce an interface only for one of three reasons: the implementation behind it is likely to
+change (Rule 3.6), a second real implementation already exists (Rule 7.10), or tests need a fake in
+place of an external system. One real implementation plus a fake is enough; a second that might
+exist someday is not. Keep the interface small: only the operations callers use, named in the
+domain's terms, no provider or SDK types in its signatures (Rule 10.5), and one contract test every
+implementation passes (Rule 4.4). When an interface has exactly one implementation and repeats its
+methods one for one, delete it. Split a shared helper once it needs flags to tell its callers
+apart — duplication is cheaper than the wrong abstraction.
