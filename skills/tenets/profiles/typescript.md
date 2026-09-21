@@ -7,13 +7,13 @@ never contradicts a rule's intent.
 
 Applies to: TypeScript and JavaScript, including Node.js and browser targets.
 
-## Primitives (Rule 07.6)
+## Primitives (Rule 7.6)
 
 Exact names: `Result<T, E>` / `ResultAsync<T, E>` with `ok()` / `err()` constructors, and
 `invariant(condition, message)` throwing `InvariantError`. Typed errors are discriminated objects
 with a `type` field. The project guide names the packages that provide them.
 
-## Type system (Rules 07.7, 02.4, 09.1)
+## Type system (Rules 7.7, 2.4, 9.1)
 
 Non-negotiable compiler settings: `strict`, `noUncheckedIndexedAccess`,
 `exactOptionalPropertyTypes`. Forbidden escape hatches, each a BLOCK finding: `any`, `@ts-ignore` /
@@ -21,7 +21,7 @@ Non-negotiable compiler settings: `strict`, `noUncheckedIndexedAccess`,
 and `as unknown as T`. Narrow `unknown` before use. Exported callable interfaces use function
 properties, not method syntax, so strict parameter variance applies.
 
-## Boundaries (Rules 02.1, 01.3)
+## Boundaries (Rules 2.1, 1.3)
 
 Parse with a schema library's non-throwing API (`safeParse`-style) and use the parsed value; derive
 the static type from the schema (`z.infer`-style) so runtime and compile-time contracts cannot
@@ -39,7 +39,7 @@ that is a measurement, not an assumption, and a contract parsed once per process
 snapshot, say) never reaches it. Where compiled validators ship, the test suite runs them, so any
 divergence from the interpreter fails the gate rather than production.
 
-## Translating a throwing dependency (Rule 02.5)
+## Translating a throwing dependency (Rule 2.5)
 
 ```ts
 try {
@@ -52,14 +52,14 @@ try {
 }
 ```
 
-## Idioms (Rules 03.4, 03.8)
+## Idioms (Rules 3.4, 3.8)
 
 Prefer `map` / `filter` / `flatMap`; use a named loop when `reduce` would obscure state. Immutability
 means `const`, `readonly`, spreads, and non-mutating transforms (`toSorted` over `sort`). Ambient
 access that belongs only in adapters: `process.env`, `console`, `process.exit`, `Date.now`,
 `Math.random`.
 
-## Tests (Rules 04.1, 04.6)
+## Tests (Rules 4.1, 4.6)
 
 Import `describe` / `it` explicitly from the project's runner — never rely on globals. `describe`
 names the public unit, `it` names observable behavior, Given/When/Then comments carry the example,
@@ -75,20 +75,20 @@ describe('Package.operation', () => {
 });
 ```
 
-## Documentation (Rules 05.2, 05.3)
+## Documentation (Rules 5.2, 5.3)
 
 JSDoc is the doc system: `@param`, `@returns`, `@throws {InvariantError}` for programmer-error
 throws only, `@example` when usage is non-obvious, `@remarks` for known abstraction leaks,
 `@internal` for test-only exports. Types replace redundant `@param` / `@returns` restatements.
 
-## Packaging (Rules 07.1–07.3)
+## Packaging (Rules 7.1–7.3)
 
 Implementation lives in `src/`. `package.json` `exports` is the public API; subpath exports carry
 cohesive modules and broad root barrels are prohibited. Package-internal references may use
 `imports` aliases such as `#internal/*`. Cross-workspace imports use the installed package name,
 never a path into another workspace's `src`.
 
-## Boundary enforcement (Rules 07.2, 07.3, 07.10)
+## Boundary enforcement (Rules 7.2, 7.3, 7.10)
 
 Mechanisms, strongest first. Prefer the ones the platform already gives you (Rule 10.4).
 
@@ -98,11 +98,11 @@ Mechanisms, strongest first. Prefer the ones the platform already gives you (Rul
   `moduleResolution` `bundler`, `node16`, or `nodenext`; `resolvePackageJsonImports: false` silently
   disables it.
 - **Workspace-graph enforcement** (`turbo boundaries`, `@nx/enforce-module-boundaries`) polices
-  package seams, including whether an import is a declared dependency at all, and cascades through
-  dependency chains. It cannot see inside a package, so slice-to-slice rules within one workspace are
-  out of reach — promoting the slice to a workspace is usually the cheaper fix (Rule 7.10). Check
-  the stability of whichever you adopt: Turborepo marks boundaries experimental, and the Nx rule
-  requires an Nx project graph.
+  package boundaries, including whether an import is a declared dependency at all, and cascades
+  through dependency chains. It cannot see inside a package, so slice-to-slice rules within one
+  workspace are out of reach — promoting the slice to a workspace is usually the cheaper fix (Rule
+  7.10). Check the stability of whichever you adopt: Turborepo marks boundaries experimental, and
+  the Nx rule requires an Nx project graph.
 - **Unused exports** are how "smallest useful surface" (Rule 7.3) gets checked. `knip` reports
   them, but only counts a barrel's exports when `includeEntryExports` is enabled — off by default,
   so public-surface enforcement is opt-in.

@@ -7,7 +7,7 @@ the summary grammar.
 ## Finding line
 
 ```text
-**[BLOCK] Rule 02.1** apps/api/src/route.ts:42 — parses the request body manually. Fix: parse with the owning schema and return a typed validation error.
+**[BLOCK] Rule 2.1** apps/api/src/route.ts:42 — parses the request body manually. Fix: parse with the owning schema and return a typed validation error.
 ```
 
 Grammar: `**[SEVERITY] Rule N.M** <path>:<line> — <problem>. Fix: <one line>.`
@@ -15,7 +15,7 @@ Grammar: `**[SEVERITY] Rule N.M** <path>:<line> — <problem>. Fix: <one line>.`
 - **Severity** is exactly one of Rule 9.1's four: BLOCK, REQUIRED CHANGES, SUGGESTION, MINOR. Never
   invent a fifth. An unmapped pattern is a SUGGESTION at most unless it risks safety, correctness,
   or data loss (Rule 9.4).
-- **Anchor**: exactly one per finding, written as the rule file writes it (`Rule 02.1`). A profile
+- **Anchor**: exactly one per finding, written as the rule file writes it (`Rule 2.1`). A profile
   addition cites the profile (`typescript A2`). No anchor means it is not a ruleset finding — drop
   it or file it as SUGGESTION, never higher.
 - **Location** is a real path and line that was actually read.

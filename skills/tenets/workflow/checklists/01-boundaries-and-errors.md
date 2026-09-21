@@ -7,8 +7,8 @@
   tests, rather than bare strings, `null`, or untyped throws? (2.3, 2.4)
 - Is every result consumed — matched, mapped, returned, or explicitly unwrapped? (2.4)
 - Are invariants limited to states impossible in correct code, and never caught to recover? (2.2)
-- Does a throwing dependency get translated exactly once at its adapter seam, with the decision
-  recorded in the adapter's contract? (2.3)
+- Does a throwing dependency get translated exactly once, in the adapter that wraps it, with the
+  decision recorded in the adapter's contract? (2.3)
 - Does a translation `catch` rethrow anything outside the boundary's declared error contract, and
   rethrow invariant failures unchanged? (2.4, 2.5)
 - Are preconditions asserted at entry and postconditions re-established before return where a

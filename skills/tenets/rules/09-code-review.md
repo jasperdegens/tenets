@@ -31,8 +31,8 @@ out-of-scope refactors.
 - Untrusted input parsed with the owning schema?
 - Recoverable failures as typed `Result` errors; declared boundary exceptions translated once?
 - Invariants limited to impossible states; postconditions asserted where promises warrant (Rule
-  02.2)?
-- Data immutable; control flow inside the Rule 03.3 signals?
+  2.2)?
+- Data immutable; control flow inside the Rule 3.3 signals?
 - Public API narrow and deep?
 - Would at least one test fail for the right reason without the implementation?
 - Tests behavioral, through public boundaries?
@@ -45,7 +45,7 @@ out-of-scope refactors.
 Exact severity, rule anchor, location, fix:
 
 ```text
-**[BLOCK] Rule 02.1** path/to/file.ts:42 parses request data manually. Replace the custom checks
+**[BLOCK] Rule 2.1** path/to/file.ts:42 parses request data manually. Replace the custom checks
 with the owning schema's safe parse and return a typed validation error.
 ```
 

@@ -10,6 +10,17 @@ the shape (only the operations callers use, domain terms, no provider or SDK typ
 test) and names the signals for deleting one. Rule 1.2's "one clear boundary benefit" now points at
 it, the index row and Dimension 2 checklist carry it, and routing scenario R20 expects it.
 
+**Streamlined rules.** Every rule file was rewritten for density without renumbering or removing an
+anchor: each fact now lives in one section and the others cite it. Rule 2.6 points at 4.3's test
+list instead of repeating it; 2.5 keeps the five-line decision flow and drops the adapter
+translation that 2.3 and the profile already own; 1.4 defers the pre-code contract to 14.1; 14.3 and
+14.5 cite 4.2 and 10.6 rather than restating them; 5.5 absorbs 6.4's stale-docs sweep; 7.x and 10.x
+lose their repeated adapter and provider sentences; 7.10 and its checklist item say "shared
+interface" where they said "port", and "seam" gives way to "the adapter that wraps it" (2.3) and "an
+internal module" (4.2, 4.4). Anchor citations in the rules, the profile, and the workflow grammar
+drop the zero padding (`Rule 2.1`, not `Rule 02.1`). The set goes from ~7,050 to ~6,000 words; every
+anchor cited from a checklist, skill, profile, or doc still resolves.
+
 ## 0.6.0 — 2026-09-17
 
 Zod 4.6, and compilation where it actually pays.

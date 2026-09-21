@@ -97,7 +97,7 @@ For each approved slice, in order:
 1. edit only the files that slice listed;
 2. run the gate command;
 3. green → one commit, message imperative, carrying the why and the anchors closed
-   (`Parse api request bodies with the owning schema (Rule 02.1)`), never a file list;
+   (`Parse api request bodies with the owning schema (Rule 2.1)`), never a file list;
 4. red → do not commit. Fix and retry, at most **three attempts** (Rule 6.2), then
    `git checkout --` **only that slice's files**, mark the slice BLOCKED, and continue with the next
    independent slice. Slices that depended on it become `SKIPPED(dep on N)`.
