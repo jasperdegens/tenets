@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+**Rule 1.6 Earning an Abstraction** gathers into one decision rule what Rules 3.6, 7.10 and 10.5
+said separately: introduce an interface only when the implementation behind it is likely to change,
+a second real implementation already exists, or tests need a fake in place of an external system —
+one real implementation plus a fake is enough, a second that might exist someday is not. It fixes
+the shape (only the operations callers use, domain terms, no provider or SDK types, one contract
+test) and names the signals for deleting one. Rule 1.2's "one clear boundary benefit" now points at
+it, the index row and Dimension 2 checklist carry it, and routing scenario R20 expects it.
+
 ## 0.6.0 — 2026-09-17
 
 Zod 4.6, and compilation where it actually pays.

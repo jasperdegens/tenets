@@ -18,6 +18,7 @@ R16	14	Before I start: what should I nail down about the ops health endpoint ret
 R17	15	I want two agents working at the same time, one adding a Stripe adapter and one adding a PayPal adapter. How should I split that so they do not clash?
 R18	15	I have a change half-finished and a teammate just landed something in the same package. What should I do before I land mine?
 R19	07	Our payments package has controllers, services and models directories, and deleting a provider means editing all three. Is that a problem?
+R20	01,10	Todo items live in a Google Sheet today and move to Postgres next quarter. Add an addItem operation the app can call. How would you shape it?
 N01	none	Summarize the README in three bullet points.
 N02	none	What does the acronym DORA stand for in software delivery?
 N03	none	List the files under the src directory.

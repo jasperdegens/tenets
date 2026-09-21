@@ -89,7 +89,7 @@ Each rule distills a respected source, keeping its teeth and recording every del
 
 | Rule | Core principle | Primary sources |
 | --- | --- | --- |
-| 01 Coding Philosophy | Correctness, reviewability, and agent legibility before speed; YAGNI → KISS → DRY in that order; deleted code leaves no shadows | Ousterhout, XP |
+| 01 Coding Philosophy | Correctness, reviewability, and agent legibility before speed; YAGNI → KISS → DRY in that order; an interface is earned by an implementation likely to change, a second real implementation, or a test fake, never by speculation; deleted code leaves no shadows | Ousterhout, XP |
 | 02 Error Handling | Every failure lives in exactly one tier — boundary schema, invariant, or typed `Result` — and assertions guard **both ends** of an interaction (the airlock); an invariant failure is never caught to recover | Design by Contract (Meyer), TigerBeetle's tiger-style, railway-oriented programming (Wlaschin), result-type practice |
 | 03 Function Design | Flat, bounded, boring control flow; deep modules that hide one volatile decision behind one operation; thin protocol wrappers | Ousterhout's *A Philosophy of Software Design*, tiger-style control-flow discipline |
 | 04 Testing | Examples derived from the requirement become the test list; behavioral red-green-refactor; coverage is feedback, never a target — a deliberate calibration away from safety-critical test-per-function mandates | TDD (Beck), BDD discovery/formulation (Cucumber), contract testing |
