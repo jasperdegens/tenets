@@ -32,7 +32,7 @@ outside `node_modules`. Nothing found → stop: `State: BLOCKED — install the 
 
 Scope: `$ARGUMENTS`. If that is empty or still contains a literal `$ARGUMENTS` or `{{args}}`, audit
 the repository root and say so in the first output line. The scope may be one or more paths, a
-workspace name, or a rule anchor to audit for specifically (`Rule 02.1`). `--report [path]` writes
+workspace name, or a rule anchor to audit for specifically (`Rule 2.1`). `--report [path]` writes
 the report to disk in addition to reporting inline.
 
 ## Phase 1 — Load the shared contracts

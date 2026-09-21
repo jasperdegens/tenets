@@ -42,9 +42,9 @@ untrusted inputs even when called from another workspace.
 ## 7.5 Architecture Ownership
 
 The project guide and its architecture notes own repository-specific boundaries and state ownership.
-Canonical state (reviewed config, schemas, public APIs, control files, compiled knowledge) is durable
-and never silently removed; operational state (caches, sessions, retry markers, cursors) may be
-cleaned up when policy allows.
+Canonical state (reviewed config, schemas, public APIs, control files, compiled knowledge) is
+durable and never silently removed; operational state (caches, sessions, retry markers, cursors) may
+be cleaned up when policy allows.
 
 Moving canonical ownership, adding a workspace family, introducing storage, or altering public API
 boundaries needs an ADR-level reason and matching docs. A package earns existence when one deep
@@ -87,6 +87,6 @@ unpublished files are as off-limits as another workspace's internals. A capabili
 *workspace* status when it needs independent ownership, release, or testing — the point at which
 its boundary becomes machine-enforced rather than conventional.
 
-Expose a family of implementations through one port plus composition at the consumer, which wires
-only the implementations it uses. Never a broad aggregator re-exporting every implementation (Rules
-7.3, 15.2); a hand-maintained registry is a recorded deviation with that cost stated.
+Expose a family of implementations behind one shared interface, and let the consumer wire only the
+implementations it uses. Never a broad aggregator re-exporting every implementation (Rules 7.3,
+15.2); a hand-maintained registry is a recorded deviation with that cost stated.

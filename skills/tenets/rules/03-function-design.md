@@ -30,11 +30,11 @@ Keep control flow flat, bounded, and boring:
 ## 3.4 Function Shape
 
 One object parameter for multi-input operations; units in names (`timeoutMs`, `sizeBytes`); boolean
-prefixes (`is`, `has`, `should`, `can`, `did`); domain types over primitive parameter trains; narrow,
-declared return types on exports; non-mutating collection transforms, with a named loop when a fold
-would obscure state. Never `fn(a, true, 5000, false)`, boolean flags that switch unrelated behavior,
-pass-through functions that hide nothing, public helpers callers must sequence by hand, or functions
-that both compute and perform unrelated side effects.
+prefixes (`is`, `has`, `should`, `can`, `did`); domain types over primitive parameter trains;
+narrow, declared return types on exports; non-mutating collection transforms, with a named loop when
+a fold would obscure state. Never `fn(a, true, 5000, false)`, boolean flags that switch unrelated
+behavior, pass-through functions that hide nothing, public helpers callers must sequence by hand, or
+functions that both compute and perform unrelated side effects.
 
 ## 3.5 Naming
 

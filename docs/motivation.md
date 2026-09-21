@@ -44,7 +44,7 @@ are reviewing the output of a process you never specified, one diff at a time, f
 teaches the agent nothing durable — the next session starts fresh.
 
 Writing the standard down inverts the loop. You review the rule once, argue about it once, and every
-future change inherits the outcome. A finding cited as `Rule 02.1` is not one reviewer's preference
+future change inherits the outcome. A finding cited as `Rule 2.1` is not one reviewer's preference
 that day; it is a decision the team already made, with the reasoning attached. Disagreement moves
 from the diff to the rule, which is where it is cheap and where it is settled for everyone.
 

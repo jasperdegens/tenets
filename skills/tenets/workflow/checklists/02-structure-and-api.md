@@ -25,8 +25,9 @@
   (7.10)
 - Would removing a capability delete one directory and unwire one export — the deletion test? (7.10)
 - Does any module import a sibling capability's unpublished files? (7.2 at module granularity, 7.10)
-- Is a family of implementations exposed through one port with composition at the consumer, rather
-  than a broad aggregator re-exporting every implementation? (7.10, 7.1, 7.3)
+- Is a family of implementations exposed behind one shared interface, with the consumer wiring only
+  the ones it uses, rather than a broad aggregator re-exporting every implementation? (7.10, 7.1,
+  7.3)
 - Is each new interface justified by an implementation likely to change, a second real
   implementation, or a test fake for an external system — not by a second implementation that might
   exist someday? (1.6)

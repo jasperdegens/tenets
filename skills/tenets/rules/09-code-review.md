@@ -31,7 +31,7 @@ out-of-scope refactors.
 - Untrusted input parsed with the owning schema?
 - Recoverable failures as typed `Result` errors; declared boundary exceptions translated once?
 - Invariants limited to impossible states; postconditions asserted where promises warrant (Rule
-  02.2)?
+  2.2)?
 - Data immutable; control flow inside the Rule 3.3 signals?
 - Public API narrow and deep?
 - Would at least one test fail for the right reason without the implementation?
