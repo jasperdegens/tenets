@@ -7,14 +7,15 @@ commits land; this rule says how a change is investigated, scoped, proved, writt
 ## 16.1 Before Touching Code
 
 - Start from the current base branch: fetch, then check whether the report is already fixed or in
-  flight — a second fix of the same defect is a defect (Rule 15.4, at the start as well as the end).
+  flight — a second fix of the same defect is a defect (Rule 15.4 applies at the start of work, not
+  only before landing).
 - Measure before theorizing. For a report from a live environment, read the records and telemetry
   first — ids, timestamps, job rows, request logs. What cannot be read, say so, and name what would
   settle it.
 - Separate what was seen from what is wrong. A report can describe correct behavior: say so on the
   issue with the evidence, and close it with the finding, never for staleness.
-- Fix the mechanism, not the instance (Rule 10.2). When a specific throw was hit, ask what structure
-  let a throw there become that symptom, and fix the structure.
+- Fix the mechanism, not the instance (Rule 10.2). When the report points at one throw, ask what let
+  a throw there become that symptom, and fix that.
 
 ## 16.2 Scope
 
@@ -23,12 +24,13 @@ commits land; this rule says how a change is investigated, scoped, proved, writt
 - The requested fix is the deliverable; never widen or narrow it quietly. A fix that changes what a
   documented field, option, or state means says so under "For the reviewer" and updates the
   contract text and docs in the same change (Rule 5.5).
-- When two surfaces derive one fact — an enforcing path and a reporting path, say — derive it once
-  and make both read it. Drift between them is itself a defect (Rule 5.5).
+- When two places compute the same fact — say, the code that enforces a limit and the page that
+  reports it — compute it once and have both read the result. If they disagree, that is a defect in
+  itself (Rule 5.5).
 - Words a person reads are part of the fix. A failure message names what was measured, what would
-  have passed, and what to do next — never an environment variable's name or a bare code
-  (Rule 11.4). A state badge carries its reason, and every refused state offers the lever that
-  clears it.
+  have passed, and what to do next — never an environment variable's name or a bare code (Rule
+  11.4). A status badge says why it shows that state, and anything the system refuses says what
+  would make it accept.
 
 ## 16.3 Proof
 
@@ -36,9 +38,9 @@ commits land; this rule says how a change is investigated, scoped, proved, writt
   test.
 - Show each new test failing against the unfixed behavior and say so in the write-up. An assertion
   nobody has seen fail is a hypothesis (Rule 4.2).
-- Exercise a user-facing change before and after on the surface the user sees, against the fixtures
-  or the local stack the project guide names, and add or adjust a fixture so the state under test
-  stays visible there afterwards.
+- Try a user-facing change before and after, on the screen or output the user sees, against the
+  fixtures or local stack the project guide names, and add or adjust a fixture so that state stays
+  visible there afterwards.
 - Run the project guide's acceptance gate for the touched layers, and any generation step until its
   diff is clean. Record what was not run and why (Rule 4.8).
 
@@ -54,8 +56,8 @@ Bad: `fix(billing): null check on invoice total`
 Good: `An invoice with no lines totals zero instead of failing to render`
 
 Deliberate calibration: Rule 11.2's imperative mood governs branch commits, which record actions
-taken. The title — the merged subject under squash merging — is scanned to learn what changed for
-the reader, so it states the outcome.
+taken. The title, which becomes the merged commit's subject under squash merging, is what a reader
+scans to learn what changed, so it states the outcome.
 
 ## 16.5 The Write-Up
 
