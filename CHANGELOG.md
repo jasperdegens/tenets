@@ -2,22 +2,72 @@
 
 ## Unreleased
 
+**Rule 1.6 Earning an Abstraction** gathers into one decision rule what Rules 3.6, 7.10 and 10.5
+said separately: introduce an interface only when the implementation behind it is likely to change,
+a second real implementation already exists, or tests need a fake in place of an external system —
+one real implementation plus a fake is enough, a second that might exist someday is not. It fixes
+the shape (only the operations callers use, domain terms, no provider or SDK types, one contract
+test) and names the signals for deleting one. Rule 1.2's "one clear boundary benefit" now points at
+it, the index row and Dimension 2 checklist carry it, and routing scenario R20 expects it.
+
+**Streamlined rules.** Every rule file was rewritten for density without renumbering or removing an
+anchor: each fact now lives in one section and the others cite it. Rule 2.6 points at 4.3's test
+list instead of repeating it; 2.5 keeps the five-line decision flow and drops the adapter
+translation that 2.3 and the profile already own; 1.4 defers the pre-code contract to 14.1; 14.3 and
+14.5 cite 4.2 and 10.6 rather than restating them; 5.5 absorbs 6.4's stale-docs sweep; 7.x and 10.x
+lose their repeated adapter and provider sentences; 7.10 and its checklist item say "shared
+interface" where they said "port", and "seam" gives way to "the adapter that wraps it" (2.3) and "an
+internal module" (4.2, 4.4). Anchor citations in the rules, the profile, and the workflow grammar
+drop the zero padding (`Rule 2.1`, not `Rule 02.1`). The set goes from ~7,050 to ~6,000 words; every
+anchor cited from a checklist, skill, profile, or doc still resolves.
+
 **Rule 16 Contributions and Fixes** is new: how a change is investigated, scoped, proved, written
 up, and closed, from a report to a merged commit a stranger can read. Measure before theorizing and
 fix the mechanism rather than the instance (16.1); one defect per change, the requested fix as the
 deliverable, one derivation per fact, and failure messages that name what was measured (16.2); the
 reproduction as the first test, every new test shown failing, and the gate run with omissions
-recorded (16.3); kind-prefixed branches and a title naming the outcome in the product's words (16.4);
-a write-up shape that stands alone in the log — reported, why, change, tests, for the reviewer,
-still open, verified locally (16.5); the issue answered in the same terms and the pull request a
-draft until its verification line is true (16.6); and the severities for a missing section, an unrun
-check, or a body that claims a check it did not run (16.7). 16.4 records a deliberate calibration:
-Rule 11.2's imperative mood governs branch commits, while a title that becomes a squash-merged
-subject states the outcome. Rule 9.1 carries the new severities, 9.2 asks for the write-up, 11.2
-points squash-merged subjects at 16.4, Dimension 6 now runs for a pull request target and asks the
-16.x questions, the guide template's Change delivery slot records squash merging and branch
-prefixes, and routing scenarios R21–R23 plus abidance scenario A08 expect the rule. The proposal
-arrived numbered 11; that number is taken and anchors never renumber, so it lands as 16.
+recorded (16.3); kind-prefixed branches and a title naming the outcome in the product's words
+(16.4); a write-up shape that stands alone in the log — reported, why, change, tests, for the
+reviewer, still open, verified locally (16.5); the issue answered in the same terms and the pull
+request a draft until its verification line is true (16.6); and the severities for a missing
+section, an unrun check, or a body that claims a check it did not run (16.7). 16.4 records a
+deliberate calibration: Rule 11.2's imperative mood governs branch commits, while a title that
+becomes a squash-merged subject states the outcome. Rule 9.1 carries the new severities, 9.2 asks
+for the write-up, 11.2 points squash-merged subjects at 16.4, Dimension 6 now runs for a pull
+request target and asks the 16.x questions, the guide template's Change delivery slot records squash
+merging and branch prefixes, and routing scenarios R21–R23 plus abidance scenario A08 expect the
+rule. The proposal arrived numbered 11; that number is taken and anchors never renumber, so it lands
+as 16.
+
+## 0.6.0 — 2026-09-17
+
+Zod 4.6, and compilation where it actually pays.
+
+**`@tenets/env` stops compiling its schemas.** `parseEnv` still caches the schema it builds per
+definition and target — that cache is what makes repeated parses roughly thirty times cheaper than
+rebuilding the contract, and it stays. What it no longer does is call `z.compile`. Measured on Zod
+4.6.5, compiling an environment-shaped contract costs about as much as two thousand parses of it,
+and a contract is parsed once per process, so the generated fast path was startup work that never
+came back. `src/typed-env/parse.bench.ts` now prices compilation against what it saves, so the
+ratio is reproducible rather than asserted, and the README no longer credits the cache's win to
+compilation. Nothing about the API, the errors, or the parsed snapshot changes; the behavioral
+suite passes unchanged, which is the proof.
+
+The peer range moves to `zod ^4.6.0`. No 4.6-only API is used — `parseEnv` returns a parsed
+snapshot, so the new boolean `.validate()` has nothing to offer it, and `withParser`,
+`instanceof().properties()`, `iban` and `currencyCode` have no environment-variable use — but one
+supported Zod line is simpler to reason about than two.
+
+**The TypeScript profile gains the rule behind that decision.** A boolean `validate`-style gate is
+correct only where nothing reads a parsed value and the schema cannot repair its input, because a
+fallback or default makes a repaired value answer "valid" and the guard narrows the input type.
+Compilation is a build-step concern first: a build-time compiler emits validators into the bundle
+and ships no compiler and no `new Function`, while a runtime compiler earns its keep only where
+expected parses per process exceed compile cost divided by per-parse saving — a measurement, not an
+assumption. Where compiled validators ship, the test suite runs them, so divergence fails the gate
+rather than production.
+
+All packages at 0.6.0. The `tenets` skill is at 2.2.0.
 
 ## 0.5.0 — 2026-09-04
 

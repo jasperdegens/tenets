@@ -15,7 +15,7 @@ description: |
   modeling, caching, or migrating data; writing request handlers, queues, and jobs; capturing
   learnings or non-obvious discoveries; or deciding where code, data, or knowledge should live.
 metadata:
-  version: '2.1.0'
+  version: '2.2.0'
   template-version: '1'
 ---
 
@@ -58,7 +58,7 @@ new sections append, existing ones never renumber.
 
 | Rule                                                            | Read when                                                                                                      |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [01 Coding Philosophy](rules/01-coding-philosophy.md)           | planning any implementation; tempted by speculative abstractions, `V2` shadows, or leaving replaced paths      |
+| [01 Coding Philosophy](rules/01-coding-philosophy.md)           | planning any implementation; deciding whether a new interface or second implementation is justified; tempted by speculative abstractions, `V2` shadows, or leaving replaced paths |
 | [02 Error Handling](rules/02-error-handling.md)                 | code can fail: boundary input, Result vs invariant vs throw, writing a `catch`, wrapping a throwing dependency |
 | [03 Function Design](rules/03-function-design.md)               | long or nested bodies, loops over unbounded input, a module's public surface, `.andThen()` chains              |
 | [04 Testing](rules/04-testing.md)                               | any behavior change — tests precede it; choosing a test level; factories, mocks, validation gates              |

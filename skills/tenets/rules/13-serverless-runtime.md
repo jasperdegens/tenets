@@ -36,7 +36,7 @@ a duplicate-effect bug waiting for load.
 
 ## 13.6 Bounds and Fan-Out
 
-Time, memory, and payload limits are hard walls: design chunked, resumable work (Rule 03.3); move
+Time, memory, and payload limits are hard walls: design chunked, resumable work (Rule 3.3); move
 long jobs to durable workflows. Bound fan-out to protect downstreams — unbounded concurrent
 functions against a fixed-connection database is the classic incident; use pooled or HTTP drivers
 and explicit concurrency caps.
