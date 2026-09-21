@@ -98,11 +98,11 @@ Mechanisms, strongest first. Prefer the ones the platform already gives you (Rul
   `moduleResolution` `bundler`, `node16`, or `nodenext`; `resolvePackageJsonImports: false` silently
   disables it.
 - **Workspace-graph enforcement** (`turbo boundaries`, `@nx/enforce-module-boundaries`) polices
-  package seams, including whether an import is a declared dependency at all, and cascades through
-  dependency chains. It cannot see inside a package, so slice-to-slice rules within one workspace are
-  out of reach — promoting the slice to a workspace is usually the cheaper fix (Rule 7.10). Check
-  the stability of whichever you adopt: Turborepo marks boundaries experimental, and the Nx rule
-  requires an Nx project graph.
+  package boundaries, including whether an import is a declared dependency at all, and cascades
+  through dependency chains. It cannot see inside a package, so slice-to-slice rules within one
+  workspace are out of reach — promoting the slice to a workspace is usually the cheaper fix (Rule
+  7.10). Check the stability of whichever you adopt: Turborepo marks boundaries experimental, and
+  the Nx rule requires an Nx project graph.
 - **Unused exports** are how "smallest useful surface" (Rule 7.3) gets checked. `knip` reports
   them, but only counts a barrel's exports when `includeEntryExports` is enabled — off by default,
   so public-surface enforcement is opt-in.

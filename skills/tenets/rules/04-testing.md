@@ -16,9 +16,9 @@ Derive concrete examples from the requirement — one per business rule plus the
 it bends — named in domain language (Rule 7.9). The example list is the test list; an example with
 no expressible assertion means the requirement is not yet understood.
 
-1. **Red:** a behavioral test at the smallest boundary that would fail without the behavior —
-   public contracts when clear, internal seams when they own meaningful behavior. It counts only
-   when it fails for the contract reason, not setup noise.
+1. **Red:** a behavioral test at the smallest boundary that would fail without the behavior — public
+   contracts when clear, an internal module when it owns meaningful behavior. It counts only when it
+   fails for the contract reason, not setup noise.
 2. **Green:** the smallest code that satisfies the contract.
 3. **Refactor:** simplify names, modules, duplication — only while green.
 
@@ -35,9 +35,9 @@ cleanup, external mutations, and policy decisions.
 ## 4.4 Boundaries and Contracts
 
 Test through public APIs — package exports, routes, RPC/tool schemas, CLI output, SDK methods,
-adapter contracts. An internal seam is a valid subject when it owns parsing, normalization,
-idempotency, retry math, or state transitions, and it still proves observable behavior; Rule 7.2's
-internal-import ban applies to tests.
+adapter contracts. An internal module is a valid subject when it owns parsing, normalization,
+idempotency, retry math, or state transitions, and the test still proves observable behavior; Rule
+7.2's internal-import ban applies to tests.
 
 Interchangeable adapters each run one shared contract test — never an E2E provider cross-product.
 Tests of an interface that hides sequencing assert success and caller-observable failure, never

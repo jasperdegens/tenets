@@ -8,7 +8,7 @@
   (4.3)
 - When touched, are authentication, authorization, resource cleanup, external mutations, and policy
   decisions covered? (4.3)
-- Do tests assert through public boundaries, with internal seams used only when they own real
+- Do tests assert through public boundaries, testing an internal module only when it owns real
   behavior? (4.4)
 - Do tests avoid knowing helper call counts, call order, or cache internals? (4.4, 4.7)
 - Is each test at the lowest level that proves its contract, with anything crossing a process or

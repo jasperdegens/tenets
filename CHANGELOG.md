@@ -16,9 +16,10 @@ list instead of repeating it; 2.5 keeps the five-line decision flow and drops th
 translation that 2.3 and the profile already own; 1.4 defers the pre-code contract to 14.1; 14.3 and
 14.5 cite 4.2 and 10.6 rather than restating them; 5.5 absorbs 6.4's stale-docs sweep; 7.x and 10.x
 lose their repeated adapter and provider sentences; 7.10 and its checklist item say "shared
-interface" where they said "port". Anchor citations in the rules, the profile, and the workflow
-grammar drop the zero padding (`Rule 2.1`, not `Rule 02.1`). The set goes from ~7,050 to ~6,000
-words; every anchor cited from a checklist, skill, profile, or doc still resolves.
+interface" where they said "port", and "seam" gives way to "the adapter that wraps it" (2.3) and "an
+internal module" (4.2, 4.4). Anchor citations in the rules, the profile, and the workflow grammar
+drop the zero padding (`Rule 2.1`, not `Rule 02.1`). The set goes from ~7,050 to ~6,000 words; every
+anchor cited from a checklist, skill, profile, or doc still resolves.
 
 ## 0.6.0 — 2026-09-17
 

@@ -30,11 +30,11 @@ rate limit, storage write failure, unsupported capability — return `Result<T, 
 for callers and tests. Service/domain layers compose `Result` values; wrappers map them at the edge
 (Rule 3.2).
 
-A throwing dependency (SDK, CLI, synchronous parser) is translated once, at its adapter seam, and
-the decision recorded in the adapter's contract: wrap into a typed `Result` carrying the failure
-kind, provider identity, and cause when a caller retries, branches on, or degrades around it; let
-it propagate when no caller can act on it. The translating `catch` rethrows an invariant failure
-unchanged (the profile shows the shape).
+A throwing dependency (SDK, CLI, synchronous parser) is translated once, in the adapter that wraps
+it, and the decision recorded in the adapter's contract: wrap into a typed `Result` carrying the
+failure kind, provider identity, and cause when a caller retries, branches on, or degrades around
+it; let it propagate when no caller can act on it. The translating `catch` rethrows an invariant
+failure unchanged (the profile shows the shape).
 
 ## 2.4 Prohibitions
 
