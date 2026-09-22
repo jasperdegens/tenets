@@ -19,7 +19,7 @@ workflow skill says *here is how to find every place that rule is violated and f
 slices*. Four sentences, four owners, no duplication.
 
 The practical payoff is that porting the standard to a new repository means filling one template,
-and porting it to a new language means writing one ~500-word profile rather than forking fifteen
+and porting it to a new language means writing one ~500-word profile rather than forking sixteen
 rule files.
 
 ## Why rules are immutable and the guide is not
@@ -53,7 +53,7 @@ index — a table mapping situations to rule files — and an agent reads the tw
 actually matched, roughly 1.5–2.5k tokens instead of the whole corpus.
 
 The same discipline runs through every layer: workflow skills read the guide *slots* they need
-rather than the whole guide, audit workers get one dimension's checklist rather than fifteen rules,
+rather than the whole guide, audit workers get one dimension's checklist rather than sixteen rules,
 and the shared contracts live in `workflow/` so six skills reference one copy. Nothing that could be
 loaded on demand is loaded eagerly.
 

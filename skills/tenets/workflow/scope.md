@@ -69,7 +69,7 @@ treating them as measured.
 | 3 | Tests                    | 04           | behavior or test files in scope                      |
 | 4 | Docs and contracts       | 05 + 01      | new or changed exports, or new files                 |
 | 5 | Data and runtime         | 12 + 13      | the guide names a store, or handlers/queues/jobs      |
-| 6 | Delivery and tooling     | 11 + 08      | commits, root config, dependencies, or tool config    |
+| 6 | Delivery and tooling     | 11 + 15 + 16 + 08 | commits, root config, dependencies, tool config, or a pull request target |
 
 Rule 09 loads in the orchestrator only. Rule 10 loads for plan and for realign's clustering. Rule 06
 loads only on the escalation path.

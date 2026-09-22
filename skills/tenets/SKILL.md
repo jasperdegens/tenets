@@ -11,6 +11,7 @@ description: |
   included; handling errors or writing
   catch blocks; creating source files or exports; shaping functions or public APIs; adding
   dependencies or workspaces; choosing architecture, storage, or tools; committing or shipping;
+  picking up a bug report, writing a pull request title or body, or answering an issue;
   modeling, caching, or migrating data; writing request handlers, queues, and jobs; capturing
   learnings or non-obvious discoveries; or deciding where code, data, or knowledge should live.
 metadata:
@@ -72,6 +73,7 @@ new sections append, existing ones never renumber.
 | [13 Serverless Runtime](rules/13-serverless-runtime.md)         | request handlers, fetch sequences, cache layers, queue/webhook consumers, long-running jobs                    |
 | [14 Planning](rules/14-planning.md)                             | before non-trivial work: naming the boundary, contract, examples, and slices; a request that names a mechanism |
 | [15 Concurrent Change](rules/15-concurrent-change.md)           | splitting work across agents or worktrees; two changes in flight over one area; a plan that may have gone stale |
+| [16 Contributions and Fixes](rules/16-contributions-and-fixes.md) | picking up a bug report or issue; deciding what one change may include; naming a branch or title; writing a pull request body; answering or closing an issue |
 
 Rules 01–02 apply to nearly all code work; the rest load on trigger.
 

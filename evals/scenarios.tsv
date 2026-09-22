@@ -19,6 +19,9 @@ R17	15	I want two agents working at the same time, one adding a Stripe adapter a
 R18	15	I have a change half-finished and a teammate just landed something in the same package. What should I do before I land mine?
 R19	07	Our payments package has controllers, services and models directories, and deleting a provider means editing all three. Is that a problem?
 R20	01,10	Todo items live in a Google Sheet today and move to Postgres next quarter. Add an addItem operation the app can call. How would you shape it?
+R21	16	A customer reports that the invoice export job failed for account 4821 last night. How do you pick this up before changing any code?
+R22	16	The fix for the null invoice total is ready on my branch. Write the pull request title and body.
+R23	16	Someone opened an issue saying the ops health page shows degraded while every service is up. I checked and the page is right. How do I respond and close it?
 N01	none	Summarize the README in three bullet points.
 N02	none	What does the acronym DORA stand for in software delivery?
 N03	none	List the files under the src directory.
