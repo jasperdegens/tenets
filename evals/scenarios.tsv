@@ -19,6 +19,8 @@ R17	15	I want two agents working at the same time, one adding a Stripe adapter a
 R18	15	I have a change half-finished and a teammate just landed something in the same package. What should I do before I land mine?
 R19	07	Our payments package has controllers, services and models directories, and deleting a provider means editing all three. Is that a problem?
 R20	01,10	Todo items live in a Google Sheet today and move to Postgres next quarter. Add an addItem operation the app can call. How would you shape it?
+R21	16	The header redesign is done and pushed. Report it to me so I can sign off from my phone without running anything.
+R22	16	How should we set up the checkout-flow work so I can QA it from any device without pulling the branch or opening a laptop?
 N01	none	Summarize the README in three bullet points.
 N02	none	What does the acronym DORA stand for in software delivery?
 N03	none	List the files under the src directory.

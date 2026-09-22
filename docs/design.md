@@ -134,6 +134,20 @@ Recorded so these are decisions rather than folklore:
   touch the other, filtered by shared-revision count). Deferred as a diagnostic rather than a gate:
   useful, but nothing depends on it, and Rule 1.2 says not yet.
 
+## Designing for verification from anywhere
+
+The person overseeing agent work is increasingly not at a workstation: they read a PR on a phone,
+steer a session from a tablet, and switch between agent interfaces during the day. A workflow that
+ends in "run it locally and see" excludes them entirely. Rule 16 inverts the default: where a human
+eye is the check, the proof travels to the reviewer in the form the change needs — a screenshot for
+what is visible, a URL for what is running — and work that cannot run in the provisioned remote
+environment is flagged rather than quietly handed back to a local machine.
+
+Two calibrations are recorded in the rule. Evidence is matched to the change, not demanded of every
+change: a refactor the gate proves needs no screenshot. And a screenshot is a human gate for design
+intent, which no assertion can express; it never substitutes for behavioral tests or becomes a
+snapshot test.
+
 ## Failure modes designed against
 
 - **Instruction dilution** — long instruction sets degrade adherence, so rules are dense and loaded

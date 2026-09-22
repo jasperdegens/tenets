@@ -23,3 +23,10 @@
 - Are the convergence points this change touched append-only, generated, or singly owned? (15.2)
 - Was the plan re-derived against what actually landed, rather than replayed against stale state?
   (15.4)
+- Where a human eye is the check, is the evidence posted where the reviewer looks — never a local
+  path — with the question it answers beside it, and failures shown the same way? (16.1)
+- Does a visible change carry a screenshot of the result at the viewports it affects? (16.2)
+- Does anything running in a live system, including every live push, carry the URL the reviewer
+  can open? (16.3)
+- Is anything that cannot run in the remote environment flagged in the plan and the report rather
+  than deferred to a local machine? (16.4)

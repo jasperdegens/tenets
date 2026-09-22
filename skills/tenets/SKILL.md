@@ -4,15 +4,16 @@ description: |
   Generic engineering ruleset for monorepos, bound to each ecosystem by a language profile
   (TypeScript ships): typed Result error handling with invariants and the airlock, boundary
   schemas, deep modules and bounded control flow, examples-first behavioral TDD, documentation
-  contracts, workspace boundaries, decision framework, change delivery, data/state modeling, and
-  serverless runtime discipline.
+  contracts, workspace boundaries, decision framework, change delivery, data/state modeling,
+  serverless runtime discipline, and remote verification with visual proof and live URLs.
 
   Use when writing, reviewing, refactoring, renaming, or testing any source code — TypeScript
   included; handling errors or writing
   catch blocks; creating source files or exports; shaping functions or public APIs; adding
   dependencies or workspaces; choosing architecture, storage, or tools; committing or shipping;
   modeling, caching, or migrating data; writing request handlers, queues, and jobs; capturing
-  learnings or non-obvious discoveries; or deciding where code, data, or knowledge should live.
+  learnings or non-obvious discoveries; reporting work as done, requesting QA or human sign-off,
+  or shipping a visible UI change; or deciding where code, data, or knowledge should live.
 metadata:
   version: '2.2.0'
   template-version: '1'
@@ -72,6 +73,7 @@ new sections append, existing ones never renumber.
 | [13 Serverless Runtime](rules/13-serverless-runtime.md)         | request handlers, fetch sequences, cache layers, queue/webhook consumers, long-running jobs                    |
 | [14 Planning](rules/14-planning.md)                             | before non-trivial work: naming the boundary, contract, examples, and slices; a request that names a mechanism |
 | [15 Concurrent Change](rules/15-concurrent-change.md)           | splitting work across agents or worktrees; two changes in flight over one area; a plan that may have gone stale |
+| [16 Remote Verification](rules/16-remote-verification.md)       | reporting work as done or asking for QA; any visible UI/UX change; a push that lands somewhere live; work that cannot run remotely |
 
 Rules 01–02 apply to nearly all code work; the rest load on trigger.
 
