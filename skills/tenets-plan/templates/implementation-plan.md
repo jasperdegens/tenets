@@ -19,7 +19,8 @@
 ## Slices
 
 <!-- Independently green, revertable commits in order (Rule 14.4). Each names its files, the test
-     that goes red first, and the gate command. -->
+     that goes red first, the gate command, and anything in it that cannot run in the remote
+     environment (Rule 17.4). -->
 
 ## Docs to update
 

@@ -68,8 +68,9 @@ fallback and the guide's version always wins. Fill it so that:
   named test at a real path using the guide's suffix (Rule 4.2, Rule 7.9). An example with no
   expressible assertion is flagged "requirement not yet understood" and becomes a question, never a
   test.
-- **Slices** each name the files touched, which test goes red first, and the gate command; every
-  slice lands green and reverts alone (Rules 11.1, 11.2). Past five slices, say "this is two plans"
+- **Slices** each name what Rule 14.4 asks — the files touched, which test goes red first, the gate
+  command, and anything that cannot run in the remote environment (Rule 17.4); every slice lands
+  green and reverts alone (Rules 11.1, 11.2). Past five slices, say "this is two plans"
   and propose the split.
 - **Docs to update** names the READMEs, topic pages, glossary entries, and decision records the
   change makes stale (Rule 5.5).

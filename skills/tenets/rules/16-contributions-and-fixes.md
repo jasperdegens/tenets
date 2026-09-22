@@ -39,10 +39,10 @@ commits land; this rule says how a change is investigated, scoped, proved, writt
 - Show each new test failing against the unfixed behavior and say so in the write-up. An assertion
   nobody has seen fail is a hypothesis (Rule 4.2).
 - Try a user-facing change before and after, on the screen or output the user sees, against the
-  fixtures or local stack the project guide names, and add or adjust a fixture so that state stays
-  visible there afterwards.
+  fixtures the project guide names, and add or adjust a fixture so that state stays visible there
+  afterwards. The reviewer sees the "after" as Rule 17.2's screenshot.
 - Run the project guide's acceptance gate for the touched layers, and any generation step until its
-  diff is clean. Record what was not run and why (Rule 4.8).
+  diff is clean; whatever was omitted lands under the write-up's "Not run" (Rules 4.8, 16.5).
 
 ## 16.4 Branches and Titles
 
@@ -74,7 +74,7 @@ Before and after, or the measured numbers, in a fenced block.
 **Tests.**              What each proves, and which fail without the change.
 **For the reviewer.**   Semantic changes, trade-offs, rollout or migration notes.
 **Still open.**         What was found and left alone, and what would settle it.
-Verified locally: the exact commands and checks run. Not run: what, and why.
+Verified: commands and checks run, plus the screenshot or URL Rule 17 owes. Not run: what, and why.
 ```
 
 - Paragraphs open with a bold lead-in and state facts and consequences, not the story of the

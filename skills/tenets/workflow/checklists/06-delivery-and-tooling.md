@@ -43,5 +43,5 @@
 - Does a visible change carry a screenshot of the result at the viewports it affects? (17.2)
 - Does anything running in a live system, including every live push, carry the URL the reviewer
   can open? (17.3)
-- Is anything that cannot run in the remote environment flagged in the plan and the report rather
-  than deferred to a local machine? (17.4)
+- Is anything that cannot run in the remote environment named in the plan's slice and under the
+  write-up's "Not run", rather than deferred to a local machine? (17.4, 14.4, 16.5)

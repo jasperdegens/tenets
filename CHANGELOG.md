@@ -28,7 +28,7 @@ deliverable, one derivation per fact, and failure messages that name what was me
 reproduction as the first test, every new test shown failing, and the gate run with omissions
 recorded (16.3); kind-prefixed branches and a title naming the outcome in the product's words
 (16.4); a write-up shape that stands alone in the log — reported, why, change, tests, for the
-reviewer, still open, verified locally (16.5); the issue answered in the same terms and the pull
+reviewer, still open, verified (16.5); the issue answered in the same terms and the pull
 request a draft until its verification line is true (16.6); and the severities for a missing
 section, an unrun check, or a body that claims a check it did not run (16.7). 16.4 records a
 deliberate calibration: Rule 11.2's imperative mood governs branch commits, while a title that
@@ -46,11 +46,23 @@ anything visible (taken with the harness's browser or a scripted one, recordings
 the URL the reviewer can open for anything running, including every push that lands somewhere live.
 Evidence is posted where the reviewer already looks with the question it answers beside it, never as
 a local path; failures are shown the same way. Work that cannot run in the provisioned remote
-environment is flagged in the plan and report rather than silently pushed back to a local machine.
-The screenshot is a human gate for design intent and never replaces behavioral tests. The project
-guide's Change delivery slot gains the verification surfaces (preview platform, URL patterns,
-screenshot tool, where evidence is posted); dimension 6 of the review checklist gains four
-questions; two routing scenarios cover the new row. The `tenets` skill moves to 2.3.0.
+environment is named in the plan's slice and the write-up's "Not run" rather than silently pushed
+back to a local machine. The screenshot is a human gate for design intent and never replaces
+behavioral tests. The project guide's Change delivery slot gains the verification surfaces (preview
+platform, URL patterns, screenshot tool, where evidence is posted); dimension 6 of the review
+checklist gains four questions; two routing scenarios cover the new row. The `tenets` skill moves to
+2.3.0.
+
+**Rules 16 and 17 cite each other.** They landed from separate branches and each restated the
+other's ground: the write-up's verification line said "Verified locally" while 17.4 forbids the
+silent fallback to a local machine, 16.3 and 17.2 both described exercising the visible surface, and
+"record what was not run" was stated in 4.8, 16.3, 16.5, 17.1 and 17.4. Now the line reads
+"Verified" and names the screenshot or URL Rule 17 owes; 16.3 points at 17.2 for what the reviewer
+sees and sends its omissions to the write-up's "Not run"; 17.1 and 17.4 send missing proof and
+local-only work to that same line instead of restating 4.8; and 14.4's slice names anything that
+cannot run remotely, which gives 17.4's plan flag a place to land. The plan template, the
+`tenets-plan` skill's slice bullet, and the guide template's evidence examples follow. Abidance
+scenario A08 expects "Verified" rather than "Verified locally". No anchor moves.
 
 ## 0.6.0 — 2026-09-17
 

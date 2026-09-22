@@ -24,10 +24,10 @@ becomes a question, not a test.
 
 ## 14.4 Slices
 
-Cut work into independently valuable slices, each landing green and revertable (Rules 11.1, 11.2).
-A slice names the files it touches, the test that goes red first, and the gate it must pass; tests
-precede the behavior they pin and primitives precede their callers. Past roughly five slices, it is
-two plans — split.
+Cut work into independently valuable slices, each landing green and revertable (Rules 11.1, 11.2). A
+slice names the files it touches, the test that goes red first, the gate it must pass, and anything
+in it that cannot run in the remote environment (Rule 17.4); tests precede the behavior they pin and
+primitives precede their callers. Past roughly five slices, it is two plans — split.
 
 ## 14.5 Push Back Before Planning Around a Conflict
 
