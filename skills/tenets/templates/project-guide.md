@@ -89,7 +89,7 @@ infer from code or config; never restate what a README or the rules already say.
 <!-- WHAT: branching model; flag/isolation conventions for unfinished work (Rule 11.2); commit
      message conventions beyond Rule 11.2's defaults; the observability tooling — logger, metrics,
      health conventions and the correlation-id mechanism (Rules 11.4, 13.6); the verification
-     surfaces (Rule 16) — preview-deployment platform and its URL pattern, staging and production
+     surfaces (Rule 17) — preview-deployment platform and its URL pattern, staging and production
      URLs, the screenshot tool, and where evidence is posted (PR comment, session).
      QUALITY BAR: an agent shipping a production-relevant change knows which logger to import and
      can hand a reviewer a URL and a screenshot without asking where they come from. -->

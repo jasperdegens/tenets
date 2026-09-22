@@ -138,7 +138,7 @@ Recorded so these are decisions rather than folklore:
 
 The person overseeing agent work is increasingly not at a workstation: they read a PR on a phone,
 steer a session from a tablet, and switch between agent interfaces during the day. A workflow that
-ends in "run it locally and see" excludes them entirely. Rule 16 inverts the default: where a human
+ends in "run it locally and see" excludes them entirely. Rule 17 inverts the default: where a human
 eye is the check, the proof travels to the reviewer in the form the change needs — a screenshot for
 what is visible, a URL for what is running — and work that cannot run in the provisioned remote
 environment is flagged rather than quietly handed back to a local machine.
