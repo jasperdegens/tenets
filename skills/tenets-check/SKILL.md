@@ -10,7 +10,7 @@ description: |
 disable-model-invocation: true
 allowed-tools: Read Glob Grep Bash(git ls-files:*)
 metadata:
-  version: '1.0.0'
+  version: '1.1.0'
   requires: 'tenets >= 2.0.0'
 ---
 
@@ -28,9 +28,9 @@ suggest `/tenets-init`.
 
 `<ruleset>` below is the `tenets` skill directory installed beside this one — **not** a path
 relative to the working directory. Resolve it once, in this order, and use it for every path after:
-`.claude/skills/tenets/`, `.agents/skills/tenets/`, then a glob for `**/skills/tenets/SKILL.md`
-outside `node_modules`. Nothing found → stop: `State: BLOCKED — install the tenets ruleset skill
-(skills add BarakChamo/tenets --all)`.
+`.agents/skills/tenets/` (where the installer puts it), `.claude/skills/tenets/`, then a glob for
+`**/skills/tenets/SKILL.md` outside `node_modules`. Nothing found → stop: `State: BLOCKED — install
+the tenets ruleset skill (npx skills add jasperdegens/tenets -y)`.
 
 ## Checks
 

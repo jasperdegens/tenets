@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+**Installable from this fork, in every harness.** Every install pointer — the README, the ruleset's
+README, and the `State: BLOCKED` line in each workflow skill — now names this repository:
+`npx skills add jasperdegens/tenets -y`, verified to write all seven skills to `.agents/skills/`
+(the directory Codex, Cursor, Gemini CLI, GitHub Copilot and opencode read) and to link them into
+`.claude/skills/` for Claude Code; the README also carries the three-line layout for an install
+without the CLI. The workflow skills resolve the ruleset at `.agents/skills/tenets/` first, since
+that is where the installer puts it. Codex reads only `name` and `description` from a `SKILL.md`,
+so `disable-model-invocation` never reached it: each of the six workflow skills now ships
+`agents/openai.yaml` with `allow_implicit_invocation: false`, the same user-invoked-only policy in
+the sidecar Codex honors. `/tenets-init` writes the routing mandate to AGENTS.md alone and, because
+Claude Code reads AGENTS.md on its own only when no CLAUDE.md exists (and only from 2.1.277),
+ensures an existing CLAUDE.md imports it with `@AGENTS.md` and offers a one-line CLAUDE.md
+otherwise. The README's harness table now says, per harness, where skills are read from, how a
+workflow skill is typed, and which file carries the mandate. The workflow skills move to 1.1.0 and
+the `tenets` skill to 2.3.1; no rule or anchor changes.
+
 **Rule 1.6 Earning an Abstraction** gathers into one decision rule what Rules 3.6, 7.10 and 10.5
 said separately: introduce an interface only when the implementation behind it is likely to change,
 a second real implementation already exists, or tests need a fake in place of an external system —

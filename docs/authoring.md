@@ -88,7 +88,10 @@ The contract each one follows:
 The same file must work in every harness the installer targets, so:
 
 - Frontmatter stays close to the spec's six keys. `disable-model-invocation` is honored by Claude
-  Code and Cursor and ignored elsewhere; anything beyond that risks a hard validation error.
+  Code and Cursor and ignored elsewhere; anything beyond that risks a hard validation error. Codex
+  reads only `name` and `description`, so a user-invoked-only skill also carries
+  `agents/openai.yaml` beside its `SKILL.md`, with `policy.allow_implicit_invocation: false` — the
+  same policy in the file Codex reads. Keep the two in agreement.
 - No `context: fork`, hooks, or shell-output injection — all single-harness mechanisms.
 - **No positional argument placeholders.** `$1` is the first argument in Codex and opencode and the
   second in Claude Code. Use `$ARGUMENTS` once, inside a prose `## Arguments` section, with a
