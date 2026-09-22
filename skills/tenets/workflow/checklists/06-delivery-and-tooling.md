@@ -38,3 +38,10 @@
   only when the reported cause is removed? (16.5, 16.7)
 - Does the comment at the fix site carry the issue number and what the defect looked like? (16.5,
   5.3)
+- Where a human eye is the check, is the evidence posted where the reviewer looks — never a local
+  path — with the question it answers beside it, and failures shown the same way? (17.1)
+- Does a visible change carry a screenshot of the result at the viewports it affects? (17.2)
+- Does anything running in a live system, including every live push, carry the URL the reviewer
+  can open? (17.3)
+- Is anything that cannot run in the remote environment flagged in the plan and the report rather
+  than deferred to a local machine? (17.4)

@@ -19,7 +19,7 @@ workflow skill says *here is how to find every place that rule is violated and f
 slices*. Four sentences, four owners, no duplication.
 
 The practical payoff is that porting the standard to a new repository means filling one template,
-and porting it to a new language means writing one ~500-word profile rather than forking sixteen
+and porting it to a new language means writing one ~500-word profile rather than forking seventeen
 rule files.
 
 ## Why rules are immutable and the guide is not
@@ -53,7 +53,7 @@ index — a table mapping situations to rule files — and an agent reads the tw
 actually matched, roughly 1.5–2.5k tokens instead of the whole corpus.
 
 The same discipline runs through every layer: workflow skills read the guide *slots* they need
-rather than the whole guide, audit workers get one dimension's checklist rather than sixteen rules,
+rather than the whole guide, audit workers get one dimension's checklist rather than seventeen rules,
 and the shared contracts live in `workflow/` so six skills reference one copy. Nothing that could be
 loaded on demand is loaded eagerly.
 
@@ -133,6 +133,20 @@ Recorded so these are decisions rather than folklore:
   what Rule 15.2 asks for. The metric is established (share of commits touching one file that also
   touch the other, filtered by shared-revision count). Deferred as a diagnostic rather than a gate:
   useful, but nothing depends on it, and Rule 1.2 says not yet.
+
+## Designing for verification from anywhere
+
+The person overseeing agent work is increasingly not at a workstation: they read a PR on a phone,
+steer a session from a tablet, and switch between agent interfaces during the day. A workflow that
+ends in "run it locally and see" excludes them entirely. Rule 17 inverts the default: where a human
+eye is the check, the proof travels to the reviewer in the form the change needs — a screenshot for
+what is visible, a URL for what is running — and work that cannot run in the provisioned remote
+environment is flagged rather than quietly handed back to a local machine.
+
+Two calibrations are recorded in the rule. Evidence is matched to the change, not demanded of every
+change: a refactor the gate proves needs no screenshot. And a screenshot is a human gate for design
+intent, which no assertion can express; it never substitutes for behavioral tests or becomes a
+snapshot test.
 
 ## Failure modes designed against
 
