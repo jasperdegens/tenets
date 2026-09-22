@@ -1,0 +1,8 @@
+# Codex reads only `name` and `description` from SKILL.md, so the user-invoked-only policy the
+# frontmatter states (`disable-model-invocation: true`) is restated here, in the file Codex reads.
+# Every other harness ignores this file. Keep it in agreement with SKILL.md.
+interface:
+  display_name: "Tenets plan"
+  short_description: "Requirement, contract, examples as tests, and green revertable slices"
+policy:
+  allow_implicit_invocation: false

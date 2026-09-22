@@ -31,7 +31,7 @@ the reason — and an audit then suppresses findings that deviation covers, beca
 authoritative for your repository. Disagreement is a first-class act here, not a quiet violation.
 
 And if you think a rule is wrong in general rather than just wrong for your repository, say so:
-[open an issue](https://github.com/BarakChamo/tenets/issues), send a pull request, or fork the set
+[open an issue](https://github.com/jasperdegens/tenets/issues), send a pull request, or fork the set
 and take it somewhere better. The anchors and the cited sources exist to make that argument
 concrete — name the number, say what it gets wrong, and the conversation has somewhere to start.
 
@@ -46,20 +46,36 @@ concrete — name the number, say what it gets wrong, and the conversation has s
 
 ## Install
 
+Each skill is one `SKILL.md` in the [Agent Skills](https://agentskills.io) format that Claude Code,
+Codex, Cursor, Gemini CLI, GitHub Copilot, opencode and most other harnesses read. Install with the
+[`skills`](https://github.com/vercel-labs/skills) CLI, from the root of the target repository:
+
 ```sh
-npm i -D @tenets/skills && npx skills experimental_sync -y
-# or, GitHub-direct:
-skills add BarakChamo/tenets --all
+npx skills add jasperdegens/tenets -y
 ```
 
-`--all` matters: this repository ships seven skills, so without it the installer prompts for a
-selection.
+That writes all seven skills to `.agents/skills/` — the shared directory Codex, Cursor, Gemini
+CLI, Copilot, opencode, Amp and others read directly — and links each into `.claude/skills/` for
+Claude Code, which reads only its own directory. Commit both. `-y` accepts every prompt; the
+installer targets the agents it detects on the machine, and `-a claude-code -a codex` names them
+instead. `--copy` copies instead of linking, `-g` installs for the user rather than the repository,
+and `npx skills update` pulls a newer version later — `skills-lock.json` records what was installed
+and from where.
 
-Then run **`/tenets-init`** in the target repository. It inspects the repo, writes a pre-filled
-project guide, records its path in `tenets.json` at the root (repo-owned, so it survives skill
-reinstalls), pins the routing mandate into AGENTS.md, and offers the per-harness command shims. The
-mandate is the determinism layer: skill activation is description-matched and probabilistic, while
-an always-loaded instruction is not.
+Without the CLI, the same layout is three lines:
+
+```sh
+git clone --depth 1 https://github.com/jasperdegens/tenets /tmp/tenets
+mkdir -p .agents/skills .claude/skills && cp -R /tmp/tenets/skills/. .agents/skills/
+for s in .agents/skills/tenets*; do ln -sfn "../../$s" ".claude/skills/$(basename "$s")"; done
+```
+
+Then run **`/tenets-init`** in the target repository (`$tenets-init` in Codex). It inspects the
+repo, writes a pre-filled project guide, records its path in `tenets.json` at the root (repo-owned,
+so it survives skill reinstalls), pins the routing mandate into AGENTS.md — imported into
+CLAUDE.md where Claude Code would otherwise not read it — and offers the per-harness command
+shims. The mandate is the determinism layer: skill activation is description-matched and
+probabilistic, while an always-loaded instruction is not.
 
 ## The skills
 
@@ -119,17 +135,6 @@ Three structural properties hold the set together — the reasoning is in [desig
 
 ## Harnesses
 
-Skills are the portable artifact: the same `SKILL.md` reaches every harness the `skills` CLI targets,
-and most read the canonical `.agents/skills/` directory directly.
-
-| Harness | Typed invocation |
-| --- | --- |
-| Claude Code | `/tenets-audit` |
-| Codex | `$tenets-audit` |
-| Cursor | `/tenets-audit` |
-| opencode | through its skill tool, or a shim `/tenets-init` offers |
-| Gemini CLI | a shim `/tenets-init` offers (skills there are model-invoked only) |
-
 Nothing depends on a single-harness mechanism: no forked-context frontmatter, no hooks, no
 shell-output injection, and no positional argument placeholders — `$1` is the first argument in some
 harnesses and the second in others. Parallel work is expressed as intent, so a harness without
@@ -137,8 +142,22 @@ parallel workers runs the same procedure sequentially for the same output. Where
 type-invoke a skill, `/tenets-init` offers a two-line shim pointing at the installed file rather than
 copying the procedure.
 
-One easily-missed detail: Gemini CLI does not read `AGENTS.md` unless `context.fileName` lists it, so
-the routing mandate needs a `GEMINI.md` pointer — `/tenets-init` offers that too.
+| Harness | Reads skills from | Typed invocation | Carries the routing mandate |
+| --- | --- | --- | --- |
+| Claude Code | `.claude/skills/` (the installer links it to `.agents/skills/`) | `/tenets-audit` | `CLAUDE.md`; `AGENTS.md` on its own only when no `CLAUDE.md` exists (2.1.277+), so `/tenets-init` keeps an `@AGENTS.md` import in `CLAUDE.md` |
+| Codex | `.agents/skills/` | `$tenets-audit` | `AGENTS.md` |
+| Cursor | `.agents/skills/` | `/tenets-audit` | `AGENTS.md` |
+| GitHub Copilot | `.agents/skills/` (also `.github/skills/`, `.claude/skills/`) | name it in the prompt | `AGENTS.md` |
+| opencode | `.agents/skills/` (also `.opencode/skills/`, `.claude/skills/`) | through its skill tool, or a shim `/tenets-init` offers | `AGENTS.md` |
+| Gemini CLI | `.agents/skills/` (also `.gemini/skills/`) | a shim `/tenets-init` offers (skills there are model-invoked only) | `GEMINI.md` — it does not read `AGENTS.md` unless `context.fileName` lists it, so `/tenets-init` offers a one-line pointer |
+
+Two details are easy to miss. The six workflow skills are user-invoked only: Claude Code and Cursor
+honor the `disable-model-invocation` frontmatter, while Codex reads only `name` and `description`
+from a `SKILL.md`, so each workflow skill also ships `agents/openai.yaml` with
+`allow_implicit_invocation: false` — the same policy, in the sidecar Codex reads. And the routing
+mandate has to reach every harness through a file it loads on every prompt: `AGENTS.md` for most,
+imported into `CLAUDE.md` where Claude Code would otherwise skip it, and pointed at from `GEMINI.md`
+for Gemini CLI.
 
 ## The primitive packages
 
@@ -193,6 +212,7 @@ authenticated `claude` CLI; runs cost real tokens.
 | `skills/tenets/workflow/` | Shared contracts for the workflow skills: findings, scope, checklists |
 | `skills/tenets-audit`, `-review`, `-plan`, `-realign` | The four workflow commands |
 | `skills/tenets-init`, `-check` | Setup and guide audit, plus the per-harness shim templates |
+| `skills/tenets-*/agents/openai.yaml` | Codex's per-skill invocation policy, mirroring `disable-model-invocation` |
 | `packages/result`, `packages/invariant`, `packages/env` | The primitives and the env boundary layer (93 specs) |
 | `docs/` | Motivation, design, authoring |
 | `evals/` | Eval runner, three scenario suites, recorded results |
@@ -203,6 +223,9 @@ authenticated `claude` CLI; runs cost real tokens.
 The rules distill published engineering thought; the packages descend from prior art and exist for
 specific additions:
 
+- **Origin**: this repository is a fork of
+  [BarakChamo/tenets](https://github.com/BarakChamo/tenets), where the rules and the primitive
+  packages originate; the `@tenets/*` packages on npm are published from there.
 - **Rules**: TigerBeetle's tiger-style, Bertrand Meyer's Design by Contract, John Ousterhout's
   *A Philosophy of Software Design*, Scott Wlaschin's railway-oriented programming, Kent Beck's TDD
   and Cucumber's BDD practice, DORA's capability research, Martin Kleppmann's *DDIA*,

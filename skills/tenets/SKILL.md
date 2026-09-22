@@ -16,7 +16,7 @@ description: |
   learnings or non-obvious discoveries; reporting work as done, requesting QA or human sign-off,
   or shipping a visible UI change; or deciding where code, data, or knowledge should live.
 metadata:
-  version: '2.3.0'
+  version: '2.3.1'
   template-version: '1'
 ---
 
@@ -42,8 +42,8 @@ tree plus an intent audit against the plan), `tenets-plan`, `tenets-realign`, `t
 `tenets-check`. **Each is a separate installed skill, invoked by its own name — not a file inside
 this one and not an argument to it.** They read `workflow/findings.md` (the finding and severity
 contract) and `workflow/scope.md` (guide slots, git scope modes, thresholds, dimensions) from here,
-and cite anchors rather than restating rules. A missing one means it was not installed: `skills add
-BarakChamo/tenets --all`.
+and cite anchors rather than restating rules. A missing one means it was not installed: `npx skills
+add jasperdegens/tenets -y`.
 
 ## Loading protocol
 

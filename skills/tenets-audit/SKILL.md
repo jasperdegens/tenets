@@ -11,7 +11,7 @@ description: |
 disable-model-invocation: true
 allowed-tools: Read Glob Grep Bash(git ls-files:*) Bash(git diff:*) Bash(wc:*)
 metadata:
-  version: '1.0.0'
+  version: '1.1.0'
   requires: 'tenets >= 2.0.0'
 ---
 
@@ -24,9 +24,9 @@ asks for one or names a path.
 
 `<ruleset>` below is the `tenets` skill directory installed beside this one — **not** a path
 relative to the working directory. Resolve it once, in this order, and use it for every path after:
-`.claude/skills/tenets/`, `.agents/skills/tenets/`, then a glob for `**/skills/tenets/SKILL.md`
-outside `node_modules`. Nothing found → stop: `State: BLOCKED — install the tenets ruleset skill
-(skills add BarakChamo/tenets --all)`.
+`.agents/skills/tenets/` (where the installer puts it), `.claude/skills/tenets/`, then a glob for
+`**/skills/tenets/SKILL.md` outside `node_modules`. Nothing found → stop: `State: BLOCKED — install
+the tenets ruleset skill (npx skills add jasperdegens/tenets -y)`.
 
 ## Arguments
 
@@ -38,8 +38,8 @@ the report to disk in addition to reporting inline.
 ## Phase 1 — Load the shared contracts
 
 Read `<ruleset>/workflow/scope.md` and `<ruleset>/workflow/findings.md`. If that path does not
-resolve, stop: `State: BLOCKED — install the tenets ruleset skill (skills add BarakChamo/tenets
---all)`. Check `<ruleset>/SKILL.md`'s `metadata.version` satisfies this skill's
+resolve, stop: `State: BLOCKED — install the tenets ruleset skill (npx skills add
+jasperdegens/tenets -y)`. Check `<ruleset>/SKILL.md`'s `metadata.version` satisfies this skill's
 `metadata.requires`; on a mismatch say which side is stale before continuing, since anchors cited
 against an older ruleset may not exist.
 

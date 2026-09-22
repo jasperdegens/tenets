@@ -12,16 +12,19 @@ deviates (coverage as signal, tool-native over zero-dependency).
 
 ## Install
 
+From the root of the target repository:
+
 ```sh
-npm i -D @tenets/skills && npx skills experimental_sync
-# or: skills add BarakChamo/tenets
+npx skills add jasperdegens/tenets -y
 ```
 
-Then in the target repository run `/tenets-init` (optionally `/tenets-init path/to/guide.md`). It
-writes the project guide, pre-filled from the repo, records the guide path in `tenets.json` at the repo root
-(self-contained, survives skill reinstalls), and pins the routing imperative into AGENTS.md for
-deterministic index loading. Audit or
-upgrade later with `/tenets-check`.
+That writes all seven skills to `.agents/skills/`, the directory Codex, Cursor, Gemini CLI, GitHub
+Copilot, opencode and others read directly, and links each into `.claude/skills/` for Claude Code.
+Then run `/tenets-init` (optionally `/tenets-init path/to/guide.md`; `$tenets-init` in Codex). It
+writes the project guide, pre-filled from the repo, records the guide path in `tenets.json` at the
+repo root (self-contained, survives skill reinstalls), and pins the routing imperative into
+AGENTS.md for deterministic index loading — imported into CLAUDE.md where Claude Code would
+otherwise not read it. Audit or upgrade later with `/tenets-check`.
 
 ## Three layers
 
@@ -87,8 +90,8 @@ hooks (`evals/scenarios.tsv`, `evals/abidance.tsv`):
    the response with `Rules: <numbers|none>`; overrides brevity/minimalism instructions).
 2. The index's own loading protocol with the same declaration.
 
-Teams wanting a hard per-prompt guarantee can add a project hook (`.claude/settings.json`) — at the
-cost of `Rules: none` announcements on non-code prompts:
+In Claude Code, teams wanting a hard per-prompt guarantee can add a project hook
+(`.claude/settings.json`) — at the cost of `Rules: none` announcements on non-code prompts:
 
 ```json
 {

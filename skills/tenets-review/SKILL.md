@@ -11,7 +11,7 @@ description: |
 disable-model-invocation: true
 allowed-tools: Read Glob Grep Bash(git status:*) Bash(git diff:*) Bash(git log:*) Bash(git merge-base:*) Bash(git symbolic-ref:*) Bash(git rev-parse:*) Bash(git branch:*) Bash(gh pr view:*) Bash(gh pr diff:*) Bash(gh repo view:*)
 metadata:
-  version: '1.0.0'
+  version: '1.1.0'
   requires: 'tenets >= 2.0.0'
 ---
 
@@ -24,9 +24,9 @@ Read-only. Never commit, push, amend, post a PR comment, or apply a fix. Fixing 
 
 `<ruleset>` below is the `tenets` skill directory installed beside this one — **not** a path
 relative to the working directory. Resolve it once, in this order, and use it for every path after:
-`.claude/skills/tenets/`, `.agents/skills/tenets/`, then a glob for `**/skills/tenets/SKILL.md`
-outside `node_modules`. Nothing found → stop: `State: BLOCKED — install the tenets ruleset skill
-(skills add BarakChamo/tenets --all)`.
+`.agents/skills/tenets/` (where the installer puts it), `.claude/skills/tenets/`, then a glob for
+`**/skills/tenets/SKILL.md` outside `node_modules`. Nothing found → stop: `State: BLOCKED — install
+the tenets ruleset skill (npx skills add jasperdegens/tenets -y)`.
 
 ## Arguments
 

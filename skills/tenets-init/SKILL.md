@@ -10,7 +10,7 @@ description: |
 disable-model-invocation: true
 allowed-tools: Read Glob Grep Write Edit Bash(git ls-files:*)
 metadata:
-  version: '1.0.0'
+  version: '1.1.0'
   requires: 'tenets >= 2.0.0'
 ---
 
@@ -22,9 +22,9 @@ Set this repository up for the tenets ruleset.
 
 `<ruleset>` below is the `tenets` skill directory installed beside this one — **not** a path
 relative to the working directory. Resolve it once, in this order, and use it for every path after:
-`.claude/skills/tenets/`, `.agents/skills/tenets/`, then a glob for `**/skills/tenets/SKILL.md`
-outside `node_modules`. Nothing found → stop: `State: BLOCKED — install the tenets ruleset skill
-(skills add BarakChamo/tenets --all)`.
+`.agents/skills/tenets/` (where the installer puts it), `.claude/skills/tenets/`, then a glob for
+`**/skills/tenets/SKILL.md` outside `node_modules`. Nothing found → stop: `State: BLOCKED — install
+the tenets ruleset skill (npx skills add jasperdegens/tenets -y)`.
 
 ## Arguments
 
@@ -35,7 +35,7 @@ AGENTS.md/CLAUDE.md, else `docs/project-guide.md` — and say which you chose.
 ## Steps
 
 1. Read `<ruleset>/templates/project-guide.md`. If that path does not resolve, stop:
-   `State: BLOCKED — install the tenets ruleset skill (skills add BarakChamo/tenets --all)`.
+   `State: BLOCKED — install the tenets ruleset skill (npx skills add jasperdegens/tenets -y)`.
 2. Detect the language profile: pick the `profiles/<name>.md` file matching the repository's
    dominant language and ecosystem, default `typescript`. If no shipped profile fits, say so and
    stop — a new profile is an authoring task, not a guide slot.
@@ -54,10 +54,17 @@ AGENTS.md/CLAUDE.md, else `docs/project-guide.md` — and say which you chose.
    `{ "guide": "<target path>", "profile": "<profile name>" }` (merge into an existing file rather
    than clobbering other fields). This is the self-contained discovery record; it survives skill
    reinstalls because it is repo-owned. Omit `profile` only when it is `typescript`, the default.
-6. Ensure AGENTS.md (or CLAUDE.md if the repo has no AGENTS.md) carries the routing mandate: read
-   the skill index, Read the matched rule files and the language profile, open responses with
-   `Rules: <numbers|none>`, stating that this overrides brevity/minimalism instructions. The mandate
-   needs an always-loaded file; guide and profile discovery do not.
+6. Ensure AGENTS.md carries the routing mandate: read the skill index, Read the matched rule files
+   and the language profile, open responses with `Rules: <numbers|none>`, stating that this
+   overrides brevity/minimalism instructions. The mandate needs a file every harness loads on every
+   prompt; guide and profile discovery do not. AGENTS.md is that file for Codex, Cursor, Copilot,
+   opencode and most others. Claude Code reads it on its own only when no CLAUDE.md or
+   CLAUDE.local.md exists in the working directory or above it (and only from 2.1.277), so when the
+   repository has a CLAUDE.md, ensure it contains an `@AGENTS.md` import line — Claude Code expands
+   the import at launch and never reads the file twice. With no CLAUDE.md, **offer** a one-line
+   `CLAUDE.md` holding just `@AGENTS.md`, for older versions and sessions that cannot read AGENTS.md
+   directly. An earlier run that wrote the mandate into CLAUDE.md gets it moved to AGENTS.md, with
+   the import left behind.
 7. Add a directive line to the same mandate, **naming every workflow command** so agents know they
    exist without their descriptions costing context: ordinary code work loads the `tenets` skill,
    and a request to audit code, review changes, plan work, realign code, set the ruleset up, or
