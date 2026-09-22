@@ -61,8 +61,10 @@ silent fallback to a local machine, 16.3 and 17.2 both described exercising the 
 sees and sends its omissions to the write-up's "Not run"; 17.1 and 17.4 send missing proof and
 local-only work to that same line instead of restating 4.8; and 14.4's slice names anything that
 cannot run remotely, which gives 17.4's plan flag a place to land. The plan template, the
-`tenets-plan` skill's slice bullet, and the guide template's evidence examples follow. Abidance
-scenario A08 expects "Verified" rather than "Verified locally". No anchor moves.
+`tenets-plan` skill's slice bullet, the guide template's evidence examples, and Dimension 6's
+question for 17.4 follow; Dimension 6's header and the dimension table in `workflow/scope.md` now
+name Rule 17, which they had omitted since it landed. Abidance scenario A08 expects "Verified"
+rather than "Verified locally". No anchor moves.
 
 ## 0.6.0 — 2026-09-17
 

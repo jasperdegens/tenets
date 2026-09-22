@@ -1,4 +1,4 @@
-# Dimension 6 — Delivery and tooling (Rules 11, 15, 16, 08)
+# Dimension 6 — Delivery and tooling (Rules 11, 15, 16, 17, 08)
 
 - Is each commit one logical change, with refactors separated from behavior changes? (11.1)
 - Does every commit pass the acceptance gate and revert cleanly on its own? (11.2)
