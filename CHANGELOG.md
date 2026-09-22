@@ -21,19 +21,36 @@ internal module" (4.2, 4.4). Anchor citations in the rules, the profile, and the
 drop the zero padding (`Rule 2.1`, not `Rule 02.1`). The set goes from ~7,050 to ~6,000 words; every
 anchor cited from a checklist, skill, profile, or doc still resolves.
 
-**Rule 17 Remote Verification** is new (16 is held by the Contributions and Fixes rule in flight):
-work is overseen from wherever the reviewer is — a phone on any network, through any agent interface
-— so verifying it never depends on a local environment. Evidence is owed where a human eye is the
-check, not on every change: a screenshot of the result for anything visible (taken with the
-harness's browser or a scripted one, recordings only on request), the URL the reviewer can open for
-anything running, including every push that lands somewhere live. Evidence is posted where the
-reviewer already looks with the question it answers beside it, never as a local path; failures are
-shown the same way. Work that cannot run in the provisioned remote environment is flagged in the
-plan and report rather than silently pushed back to a local machine. The screenshot is a human gate
-for design intent and never replaces behavioral tests. The project guide's Change delivery slot
-gains the verification surfaces (preview platform, URL patterns, screenshot tool, where evidence is
-posted); dimension 6 of the review checklist gains four questions; two routing scenarios cover the
-new row. The `tenets` skill moves to 2.3.0.
+**Rule 16 Contributions and Fixes** is new: how a change is investigated, scoped, proved, written
+up, and closed, from a report to a merged commit a stranger can read. Measure before theorizing and
+fix the mechanism rather than the instance (16.1); one defect per change, the requested fix as the
+deliverable, one derivation per fact, and failure messages that name what was measured (16.2); the
+reproduction as the first test, every new test shown failing, and the gate run with omissions
+recorded (16.3); kind-prefixed branches and a title naming the outcome in the product's words
+(16.4); a write-up shape that stands alone in the log — reported, why, change, tests, for the
+reviewer, still open, verified locally (16.5); the issue answered in the same terms and the pull
+request a draft until its verification line is true (16.6); and the severities for a missing
+section, an unrun check, or a body that claims a check it did not run (16.7). 16.4 records a
+deliberate calibration: Rule 11.2's imperative mood governs branch commits, while a title that
+becomes a squash-merged subject states the outcome. Rule 9.1 carries the new severities, 9.2 asks
+for the write-up, 11.2 points squash-merged subjects at 16.4, Dimension 6 now runs for a pull
+request target and asks the 16.x questions, the guide template's Change delivery slot records squash
+merging and branch prefixes, and routing scenarios R21–R23 plus abidance scenario A08 expect the
+rule. The proposal arrived numbered 11; that number is taken and anchors never renumber, so it lands
+as 16.
+
+**Rule 17 Remote Verification** is new: work is overseen from wherever the reviewer is — a phone on
+any network, through any agent interface — so verifying it never depends on a local environment.
+Evidence is owed where a human eye is the check, not on every change: a screenshot of the result for
+anything visible (taken with the harness's browser or a scripted one, recordings only on request),
+the URL the reviewer can open for anything running, including every push that lands somewhere live.
+Evidence is posted where the reviewer already looks with the question it answers beside it, never as
+a local path; failures are shown the same way. Work that cannot run in the provisioned remote
+environment is flagged in the plan and report rather than silently pushed back to a local machine.
+The screenshot is a human gate for design intent and never replaces behavioral tests. The project
+guide's Change delivery slot gains the verification surfaces (preview platform, URL patterns,
+screenshot tool, where evidence is posted); dimension 6 of the review checklist gains four
+questions; two routing scenarios cover the new row. The `tenets` skill moves to 2.3.0.
 
 ## 0.6.0 — 2026-09-17
 

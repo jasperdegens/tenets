@@ -14,7 +14,8 @@ slice lands green and reviewable instead of accumulating into one unreviewable b
 Every commit passes the acceptance gate and reverts cleanly on its own; never commit red. Unfinished
 behavior stays unreachable — behind a flag, unwired from routes and exports — rather than
 half-shipped, and the isolation is deleted with the same discipline when the work completes (Rule
-1.5). Commit messages are imperative and carry the why, not a file list.
+1.5). Commit messages are imperative and carry the why, not a file list; a title that becomes a
+squash-merged subject follows Rule 16.4.
 
 ## 11.3 Signals, Not Targets
 
