@@ -1,4 +1,4 @@
-# Dimension 6 — Delivery and tooling (Rules 11, 15, 16, 17, 08)
+# Dimension 6 — Delivery and tooling (Rules 11, 15, 16, 17, 18, 08)
 
 - Is each commit one logical change, with refactors separated from behavior changes? (11.1)
 - Does every commit pass the acceptance gate and revert cleanly on its own? (11.2)
@@ -47,3 +47,12 @@
   can open? (17.3)
 - Is anything that cannot run in the remote environment named in the plan's slice and under the
   write-up's "Not run", rather than deferred to a local machine? (17.4, 14.4, 16.5)
+- Is every variable the code reads declared in the parsed contract and listed in the example file,
+  with no environment access outside the module that parses it? (18.1)
+- Do env files stay gitignored with the example re-included, and does no commit, log, or output
+  carry a real value? (18.3)
+- Does a new worktree or clone become runnable through the one setup command, with
+  `.worktreeinclude` naming the gitignored files it needs? (18.4)
+- Do parallel worktrees get their own ports, databases, and container names? (18.5)
+- Is a variable a remote environment lacks named, rather than papered over with a placeholder,
+  mock, or fallback? (18.6, 17.4)

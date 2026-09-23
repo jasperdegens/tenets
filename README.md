@@ -1,7 +1,7 @@
 # tenets
 
 An engineering standard for coding agents, distilled from the canon and packaged as installable
-skills: **17 language-neutral rules behind a trigger-routing index, a language profile that binds
+skills: **18 language-neutral rules behind a trigger-routing index, a language profile that binds
 them to one ecosystem, one editable per-project file, six commands that apply the rules to real
 code, the primitives the TypeScript profile requires, and an eval suite** that measures whether
 agents actually load and follow the rules.
@@ -43,6 +43,7 @@ concrete — name the number, say what it gets wrong, and the conversation has s
 | [Design](docs/design.md) | The four composable layers, anchors as API, progressive disclosure, measured determinism |
 | [Authoring](docs/authoring.md) | Adding a rule, writing a profile, populating a guide, writing a portable workflow skill |
 | [Provider families](docs/patterns/provider-families.md) | Fan out by workspace, fan in by composition — the shape for many interchangeable implementations |
+| [Worktrees](docs/how-to/worktrees.md) | One setup command for every new worktree, env files included, wired into each harness; env conventions locally and in remote environments |
 
 ## Install
 
@@ -86,7 +87,7 @@ probabilistic, while an always-loaded instruction is not.
 | `/tenets-review [target]` | reviews a PR, branch, or dirty tree, plus an intent audit against the active plan |
 | `/tenets-plan [request]` | requirement, contract, examples-as-tests, green revertable slices |
 | `/tenets-realign [scope]` | ordered slice plan, applied on approval, one green commit per slice |
-| `/tenets-init` | sets a repo up: guide, `tenets.json`, routing mandate, per-harness shims |
+| `/tenets-init` | sets a repo up: guide, `tenets.json`, routing mandate, per-harness shims, worktree setup |
 | `/tenets-check` | audits the guide: structure, freshness, quality bars, anchors, template version |
 
 The six workflow skills are user-invoked only — their descriptions stay out of context, so they
@@ -122,6 +123,7 @@ Each rule distills a respected source, keeping its teeth and recording every del
 | 15 Concurrent Change | Parallel work is partitioned by write set, not by task description; convergence points are named and made append-only, generated, or singly owned; a plan is re-derived after another change lands; if the split fights the structure, the structure is wrong | Conway 1968, Team Topologies (Skelton & Pais), trunk-based development (DORA), Parnas 1972 via Rule 7.10 |
 | 16 Contributions and Fixes | A change is finished when a stranger can read from the merged commit why it exists, what it proved, and what it left open: measure before theorizing, fix the mechanism not the instance, one defect per change, the reproduction is the first test, a title in the product's words, a write-up that stands alone in the log, the issue closed with the finding | Agans' *Debugging* ("quit thinking and look"), Google's eng-practices on CL descriptions, the Linux kernel's *Submitting Patches*, DORA (small batches) |
 | 17 Remote Verification | Evidence where a human eye is the check, not on every change: a screenshot for anything visible, a live URL for anything running, posted where the reviewer already looks and judgeable from a phone; failures shown the same way; work that cannot run in a remote environment is flagged, never silently pushed back to a local machine | Continuous Delivery (Humble & Farley), preview-environment practice, genchi genbutsu (go and see) |
+| 18 Environments and Worktrees | Configuration reaches code only through the process environment, declared once in a parsed contract and an example file; env files are a local convenience and secrets never reach git or output; one idempotent command makes any worktree or fresh clone runnable, copying the gitignored files `.worktreeinclude` names; parallel copies share history, not state; a remote environment is provisioned, never patched | The twelve-factor app (III. Config), git-worktree, Claude Code's `.worktreeinclude`, dotenv practice |
 
 Three structural properties hold the set together — the reasoning is in [design](docs/design.md):
 
@@ -206,16 +208,17 @@ authenticated `claude` CLI; runs cost real tokens.
 | Path | Contents |
 | --- | --- |
 | `skills/tenets/SKILL.md` | Routing index, loading protocol, guide and profile discovery |
-| `skills/tenets/rules/` | The 17 rule files |
+| `skills/tenets/rules/` | The 18 rule files |
 | `skills/tenets/profiles/` | Language profiles; `typescript.md` ships |
-| `skills/tenets/templates/` | Project-guide template (WHAT / WHY / QUALITY BAR per slot) |
+| `skills/tenets/templates/` | Project-guide template (WHAT / WHY / QUALITY BAR per slot) and the worktree setup script |
 | `skills/tenets/workflow/` | Shared contracts for the workflow skills: findings, scope, checklists |
 | `skills/tenets-audit`, `-review`, `-plan`, `-realign` | The four workflow commands |
 | `skills/tenets-init`, `-check` | Setup and guide audit, plus the per-harness shim templates |
 | `skills/tenets-*/agents/openai.yaml` | Codex's per-skill invocation policy, mirroring `disable-model-invocation` |
 | `packages/result`, `packages/invariant`, `packages/env` | The primitives and the env boundary layer (93 specs) |
-| `docs/` | Motivation, design, authoring |
+| `docs/` | Motivation, design, authoring, patterns, how-to guides |
 | `evals/` | Eval runner, three scenario suites, recorded results |
+| `test/` | Behavioral tests for the shipped templates — not installed with the skills |
 | `examples/project-guide-example.md` | A real populated guide |
 
 ## Credits

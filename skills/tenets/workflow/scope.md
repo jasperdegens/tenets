@@ -12,17 +12,17 @@ matrix below and say so in the first output line.
 
 Read only the slots the run needs; the guide is read far more often than any rule.
 
-| Slot                  | audit      | review     | plan            | realign      |
-| --------------------- | ---------- | ---------- | --------------- | ------------ |
-| Stack (and profile)   | yes        | yes        | yes             | yes          |
-| Commands (gate)       | name only  | name only  | yes             | **required** |
-| Workspace map         | yes        | yes        | yes             | yes          |
-| Shared primitives     | yes        | yes        | yes             | yes          |
-| Tests                 | yes        | yes        | yes             | yes          |
-| Documentation map     | yes        | yes        | template + plan | yes          |
-| Data and runtime      | dimension 5| dimension 5| if storage      | dimension 5  |
-| Change delivery       | no         | yes        | yes             | yes          |
-| Recorded deviations   | yes        | yes        | yes             | yes          |
+| Slot                | audit           | review          | plan              | realign         |
+| ------------------- | --------------- | --------------- | ----------------- | --------------- |
+| Stack (and profile) | yes             | yes             | yes               | yes             |
+| Commands (gate)     | name only       | name only       | yes               | **required**    |
+| Workspace map       | yes             | yes             | yes               | yes             |
+| Shared primitives   | yes             | yes             | yes               | yes             |
+| Tests               | yes             | yes             | yes               | yes             |
+| Documentation map   | yes             | yes             | template + plan   | yes             |
+| Data and runtime    | dimensions 5, 6 | dimensions 5, 6 | if storage or env | dimensions 5, 6 |
+| Change delivery     | no              | yes             | yes               | yes             |
+| Recorded deviations | yes             | yes             | yes               | yes             |
 
 ## Git scope modes
 
@@ -69,7 +69,7 @@ treating them as measured.
 | 3 | Tests                    | 04           | behavior or test files in scope                      |
 | 4 | Docs and contracts       | 05 + 01      | new or changed exports, or new files                 |
 | 5 | Data and runtime         | 12 + 13      | the guide names a store, or handlers/queues/jobs      |
-| 6 | Delivery and tooling     | 11 + 15 + 16 + 17 + 08 | commits, root config, dependencies, tool config, or a pull request target |
+| 6 | Delivery and tooling     | 11 + 15 + 16 + 17 + 18 + 08 | commits, root config, dependencies, tool config, environment variables or env files, or a pull request target |
 
 Rule 09 loads in the orchestrator only. Rule 10 loads for plan and for realign's clustering. Rule 06
 loads only on the escalation path.

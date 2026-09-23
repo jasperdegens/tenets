@@ -3,15 +3,15 @@ name: tenets-init
 description: |
   Sets a repository up for the tenets ruleset: writes the project guide pre-filled from the
   repository, records it in tenets.json, pins the routing mandate into AGENTS.md, and offers the
-  per-harness command shims.
+  per-harness command shims and the worktree setup script.
 
   Use only when the user explicitly asks to set up or re-initialize the tenets ruleset in a
   repository, or runs /tenets-init. Not for ordinary code work or editing an existing guide by hand.
 disable-model-invocation: true
 allowed-tools: Read Glob Grep Write Edit Bash(git ls-files:*)
 metadata:
-  version: '1.1.0'
-  requires: 'tenets >= 2.0.0'
+  version: '1.2.0'
+  requires: 'tenets >= 2.4.0'
 ---
 
 # Tenets init
@@ -44,8 +44,10 @@ AGENTS.md/CLAUDE.md, else `docs/project-guide.md` — and say which you chose.
    live/expensive commands), workspaces and namespace (manifests), dependency enforcement
    (task-runner config), primitive locations (search for the profile's primitive names), test runner
    and suffixes (configs and existing test filenames), stores and platform (deps and deploy config),
-   observability tooling. Ecosystem-wide facts the profile already fixes — strictness settings, doc
-   tags, test declaration form — do not go in the guide.
+   observability tooling, environment configuration (contract modules, the example file, a pull
+   command among the scripts, an existing `.worktreeinclude` or worktree setup command).
+   Ecosystem-wide facts the profile already fixes — strictness settings, doc tags, test declaration
+   form — do not go in the guide.
 4. Write the guide at the target path: template headings verbatim, comments replaced by content —
    one line per fact, under ~600 words total. A slot the repo cannot answer yet gets an explicit
    placeholder naming what is missing (for stores: state "no store yet" explicitly). Keep the
@@ -82,7 +84,23 @@ AGENTS.md/CLAUDE.md, else `docs/project-guide.md` — and say which you chose.
 9. When `.gemini/` exists, **offer** a one-line `GEMINI.md` pointing at AGENTS.md, and explain why:
    Gemini CLI does not read AGENTS.md unless `context.fileName` lists it, so the routing mandate
    would silently not load there.
-10. Self-check every section against its QUALITY BAR from the template; fix or flag failures.
-11. Offer (do not apply unasked) the optional per-prompt determinism hook from the ruleset README.
-12. Report: the guide path, the profile, slots filled vs flagged, the AGENTS.md lines written, and
-    which shims were offered or written.
+10. **Offer** the worktree setup (Rule 18.4) — never write it unasked. Copy
+    `<ruleset>/templates/worktree-setup.sh` to the repository's scripts directory with its install
+    and check lines set from the Commands table, and add it to the Commands table as the setup
+    command for a new worktree or clone. Write `.worktreeinclude` naming the gitignored files a new
+    worktree needs — env files and local settings from
+    `git ls-files --others --ignored --exclude-standard --directory`, never dependencies or build
+    output. Then, for each harness the repository configures, the one entry that runs the script:
+    `"setup-worktree": ["bash scripts/worktree-setup.sh"]` in `.cursor/worktrees.json`;
+    `"scripts": { "setup": "bash scripts/worktree-setup.sh --from \"$CONDUCTOR_ROOT_PATH\"" }` in
+    `conductor.json`; for Claude Code, whose own worktrees copy `.worktreeinclude` already, a
+    `SessionStart` hook matching `startup` that runs
+    `cd "$(jq -r .cwd)" && { [ -e node_modules ] || bash scripts/worktree-setup.sh; } >&2` — the
+    hook input's `cwd` is the worktree while `CLAUDE_PROJECT_DIR` stays at the main checkout, the
+    guard names the profile's dependency directory so an installed checkout is skipped, and stderr
+    keeps install output out of the session's context. The Codex app generates its own local
+    environment file, so name the script to enter as its setup script rather than editing it.
+11. Self-check every section against its QUALITY BAR from the template; fix or flag failures.
+12. Offer (do not apply unasked) the optional per-prompt determinism hook from the ruleset README.
+13. Report: the guide path, the profile, slots filled vs flagged, the AGENTS.md lines written, and
+    which shims and worktree files were offered or written.
