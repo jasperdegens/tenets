@@ -2,6 +2,35 @@
 
 ## Unreleased
 
+**Rule 18 Environments and Worktrees** is new, with the worktree setup it calls for. Configuration
+reaches code only through the process environment: every variable is declared once, in the contract
+parsed at startup and in a committed example file (18.1); env files are a local convenience, loaded
+before the contract is parsed and never required, while remote environments get the same variables
+from their platform (18.2); real values stay out of commits, logs, write-ups and prompts, and a
+client-prefixed value is public (18.3). A worktree or fresh clone becomes runnable through one
+idempotent command — copy the gitignored files `.worktreeinclude` names, install from the lockfile,
+parse the contract — that every harness's worktree hook calls (18.4); worktrees share history, not
+ports, databases or container names (18.5); and a variable a remote environment lacks is named,
+never defaulted or mocked (18.6).
+
+The skill ships that command as `templates/worktree-setup.sh`. It copies only gitignored files,
+never overwrites one, enters a wholly ignored directory only the way Claude Code does — so `.env*`
+never copies an `.env` out of `node_modules` — prints paths but never contents, skips the copy where
+there is no other checkout, and fails with a failing step's own exit code. Twenty behavioral tests in
+`test/worktree-setup.test.ts` pin that, and CI runs them. `docs/how-to/worktrees.md` covers adopting
+it and wiring Claude Code (a `SessionStart` hook), Cursor (`.cursor/worktrees.json`), Conductor
+(`conductor.json`), the Codex app and plain git, plus the env conventions locally and in remote
+environments. The TypeScript profile binds the rule: `.env.example`, `.env*` then `!.env.example`,
+framework and `--env-file-if-exists` loading, client prefixes, lockfile-exact installs. The guide
+template's Commands and Data and runtime slots record the setup command and where each environment's
+variables come from; Dimension 6 asks five 18.x questions and now runs when environment variables or
+env files change; `/tenets-init` pre-fills environment facts and offers the script, a
+`.worktreeinclude`, and each harness's one-line entry. Routing scenarios R26–R28 and abidance
+scenario A09 expect the rule. In a smoke run against a minimal consumer rather than the reference
+one, R26–R28 routed to Rule 18, R17–R18 stayed on Rule 15, and the negatives stayed silent; A09's
+answer was right both times, but once it reached Rule 18 by searching rather than through the index.
+The full suites were not run. The `tenets` skill moves to 2.4.0 and `tenets-init` to 1.2.0.
+
 **Installable from this fork, in every harness.** Every install pointer — the README, the ruleset's
 README, and the `State: BLOCKED` line in each workflow skill — now names this repository:
 `npx skills add jasperdegens/tenets -y`, verified to write all seven skills to `.agents/skills/`

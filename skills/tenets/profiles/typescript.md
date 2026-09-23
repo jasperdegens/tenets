@@ -123,6 +123,19 @@ Rule 13 applies to JavaScript serverless platforms: `Promise.all` for independen
 client reuse, `after()`-style post-response hooks, streaming responses. The project guide names the
 platform and its limits.
 
+## Environment (Rule 18)
+
+The contract is one schema module per workspace that reads variables, parsed once at startup from
+`process.env`. `@tenets/env` provides one — `defineEnv` composes package contracts into the app's,
+`requiredWhenDeployed` states what only a deployment needs — and the guide names what the project
+uses. The example file is `.env.example` and local values live in `.env.local` (or
+`.env.<mode>.local`); `.gitignore` carries `.env*` then `!.env.example`, because `.env*` alone — the
+pattern framework starters ship — ignores the example too. Next.js, Vite, and Bun load `.env*` files
+themselves; plain Node takes `--env-file-if-exists=.env.local` at the process boundary, never a
+loader imported by library code. Anything behind `NEXT_PUBLIC_`, `VITE_`, or `PUBLIC_` is compiled
+into the client bundle. The setup command installs with the lockfile-exact form: `npm ci`,
+`pnpm install --frozen-lockfile`, `yarn install --immutable`, or `bun install --frozen-lockfile`.
+
 ## Waivers
 
 None — every rule anchor applies as written.

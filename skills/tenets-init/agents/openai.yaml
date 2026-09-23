@@ -3,6 +3,6 @@
 # Every other harness ignores this file. Keep it in agreement with SKILL.md.
 interface:
   display_name: "Tenets init"
-  short_description: "Sets a repo up: project guide, tenets.json, routing mandate, shims"
+  short_description: "Sets a repo up: project guide, tenets.json, routing mandate, shims, worktree setup"
 policy:
   allow_implicit_invocation: false

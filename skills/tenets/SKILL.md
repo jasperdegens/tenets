@@ -16,7 +16,7 @@ description: |
   learnings or non-obvious discoveries; reporting work as done, requesting QA or human sign-off,
   or shipping a visible UI change; or deciding where code, data, or knowledge should live.
 metadata:
-  version: '2.3.1'
+  version: '2.4.0'
   template-version: '1'
 ---
 
@@ -76,6 +76,7 @@ new sections append, existing ones never renumber.
 | [15 Concurrent Change](rules/15-concurrent-change.md)           | splitting work across agents or worktrees; two changes in flight over one area; a plan that may have gone stale |
 | [16 Contributions and Fixes](rules/16-contributions-and-fixes.md) | picking up a bug report or issue; deciding what one change may include; naming a branch or title; writing a pull request body; answering or closing an issue |
 | [17 Remote Verification](rules/17-remote-verification.md)       | reporting work as done or asking for QA; any visible UI/UX change; a push that lands somewhere live; work that cannot run remotely |
+| [18 Environments and Worktrees](rules/18-environments-and-worktrees.md) | creating or setting up a worktree or fresh clone; adding, renaming, or reading an environment variable; env files, example files, or secrets; a variable a remote environment lacks |
 
 Rules 01–02 apply to nearly all code work; the rest load on trigger.
 

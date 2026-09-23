@@ -24,6 +24,9 @@ R22	16	The fix for the null invoice total is ready on my branch. Write the pull 
 R23	16	Someone opened an issue saying the ops health page shows degraded while every service is up. I checked and the page is right. How do I respond and close it?
 R24	17	The header redesign is done and pushed. Report it to me so I can sign off from my phone without running anything.
 R25	17	How should we set up the checkout-flow work so I can QA it from any device without pulling the branch or opening a laptop?
+R26	18	I am starting a second agent in a new git worktree for the ops dashboard work. How do its env files and dependencies get set up?
+R27	18	The greeting API needs a new SENTRY_DSN variable. Where is it declared, and how does it reach local runs, CI, and cloud agent sessions?
+R28	18	The cloud agent session fails at startup because DATABASE_URL is missing. Can you default it to the local Postgres URL so the tests run?
 N01	none	Summarize the README in three bullet points.
 N02	none	What does the acronym DORA stand for in software delivery?
 N03	none	List the files under the src directory.

@@ -19,7 +19,7 @@ workflow skill says *here is how to find every place that rule is violated and f
 slices*. Four sentences, four owners, no duplication.
 
 The practical payoff is that porting the standard to a new repository means filling one template,
-and porting it to a new language means writing one ~500-word profile rather than forking seventeen
+and porting it to a new language means writing one ~500-word profile rather than forking eighteen
 rule files.
 
 ## Why rules are immutable and the guide is not
@@ -53,7 +53,7 @@ index — a table mapping situations to rule files — and an agent reads the tw
 actually matched, roughly 1.5–2.5k tokens instead of the whole corpus.
 
 The same discipline runs through every layer: workflow skills read the guide *slots* they need
-rather than the whole guide, audit workers get one dimension's checklist rather than seventeen rules,
+rather than the whole guide, audit workers get one dimension's checklist rather than eighteen rules,
 and the shared contracts live in `workflow/` so six skills reference one copy. Nothing that could be
 loaded on demand is loaded eagerly.
 
@@ -133,6 +133,14 @@ Recorded so these are decisions rather than folklore:
   what Rule 15.2 asks for. The metric is established (share of commits touching one file that also
   touch the other, filtered by shared-revision count). Deferred as a diagnostic rather than a gate:
   useful, but nothing depends on it, and Rule 1.2 says not yet.
+- **A worktree command.** A `/tenets-worktree` skill or CLI that creates worktrees was considered
+  and declined: git and every harness already create them (Rule 15.6), and a wrapper would
+  duplicate both (Rule 10.4). The repository owns only what they cannot know — its own setup.
+- **Symlinked env files.** Linking each worktree's `.env.local` to the main checkout's would make a
+  rotated secret reach every worktree at once, but a per-worktree value such as a port could no
+  longer differ, and a relative link breaks when the worktree sits at another depth. Copies that are
+  never overwritten keep both; rotating is a delete and a re-run. Revisit if secrets rotate often
+  enough that stale copies cause real failures.
 
 ## Designing for verification from anywhere
 
@@ -147,6 +155,24 @@ Two calibrations are recorded in the rule. Evidence is matched to the change, no
 change: a refactor the gate proves needs no screenshot. And a screenshot is a human gate for design
 intent, which no assertion can express; it never substitutes for behavioral tests or becomes a
 snapshot test.
+
+## Designing for many working copies
+
+Parallel agents made working copies cheap: one repository now has a main checkout, a few worktrees,
+and cloud sessions that clone it fresh, all expected to run the same code the same way. What breaks
+first is everything git does not carry — env files, dependencies, a free port. Rule 18 treats that
+as one problem with two halves.
+
+Configuration reaches code only through the process environment, so a laptop reading `.env.local`,
+a worktree holding a copy of it, and a cloud session whose platform injects the same variables all
+run one code path; a file is a local convenience, never a requirement. And a new working copy
+becomes runnable through one repository-owned command that every harness calls — Claude Code's
+`SessionStart` hook, Cursor's `worktrees.json`, Conductor's setup script, the Codex app's local
+environment — rather than each harness carrying its own copy of the steps. The list of files to copy
+is `.worktreeinclude` because the harnesses had already converged on it, and the shipped script
+reproduces Claude Code's semantics — only gitignored files, ignored directories entered only when a
+pattern names them — with git doing the matching, so the list means the same thing wherever it is
+read. [The how-to](how-to/worktrees.md) wires each harness.
 
 ## Failure modes designed against
 

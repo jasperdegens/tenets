@@ -1,7 +1,7 @@
 # tenets
 
-A generic, distilled engineering ruleset for monorepos, packaged as an agent skill: 17
-language-neutral rules (~7,500 words) behind a trigger-routing index, a language profile that binds
+A generic, distilled engineering ruleset for monorepos, packaged as an agent skill: 18
+language-neutral rules (~8,100 words) behind a trigger-routing index, a language profile that binds
 them to one ecosystem, one editable per-project translation file (the project guide), and two
 commands to create and audit it.
 
@@ -67,10 +67,12 @@ guide's job. Set `tenets.json`'s `profile` field to the file's name; `typescript
 ## Layout
 
 - `SKILL.md` — the routing index; loads on trigger, points to one rule file per situation.
-- `rules/` — 17 rule files, stable section anchors (`Rule 4.3`); anchors never renumber.
+- `rules/` — 18 rule files, stable section anchors (`Rule 4.3`); anchors never renumber.
 - `profiles/` — one file per language/ecosystem; `typescript.md` ships, and the profile loads with
   the rules.
 - `templates/project-guide.md` — the editable translation template (WHAT/WHY/QUALITY BAR per slot).
+- `templates/worktree-setup.sh` — the one command that makes a new worktree or fresh clone runnable
+  (Rule 18.4); `/tenets-init` offers to copy it into a repository's scripts.
 - `workflow/` — shared contracts for the `tenets-*` workflow skills: `findings.md` (finding grammar,
   severity source, confidence, dedup, summary line, worker schema), `scope.md` (guide slots, git
   scope modes, effort thresholds, dimensions, degradation), and `checklists/` (one question list per

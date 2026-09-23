@@ -22,10 +22,11 @@ infer from code or config; never restate what a README or the rules already say.
 
 ## Commands
 
-<!-- WHAT: one table (Command | Use) covering setup, iteration/dev, the full acceptance gate,
+<!-- WHAT: one table (Command | Use) covering setup (including the one command that makes a new
+     worktree or fresh clone runnable, Rule 18.4), iteration/dev, the full acceptance gate,
      format/lint fixes, and any expensive or live commands — explicitly marked as such.
-     WHY: Rules 08, 4.8, and 9.2 defer here; Rule 11.2's "green commit" means this table's gate
-     passes. Agents must never guess whether a command is cheap iteration or a live call.
+     WHY: Rules 08, 4.8, 9.2, and 18.4 defer here; Rule 11.2's "green commit" means this table's
+     gate passes. Agents must never guess whether a command is cheap iteration or a live call.
      QUALITY BAR: the gate command is unambiguous, and nothing requires undocumented flags. -->
 
 | Command | Use |
@@ -80,9 +81,14 @@ infer from code or config; never restate what a README or the rules already say.
 <!-- WHAT: the concrete stores per Rule 12.2 (system of record, KV/cache, analytics, blob) and
      which workspace owns which tables; the serverless platform and its hard limits — timeout,
      memory, payload, concurrency (Rule 13); the caching layers available and the invalidation
-     tooling (Rule 13.3).
+     tooling (Rule 13.3); environment configuration (Rule 18) — where the contracts and the
+     example file live, the one source of local values (a secret-manager or platform pull, or a
+     copy from the main checkout), where each remote environment (agent sessions, CI, preview,
+     production) gets its variables and which it lacks, and how parallel worktrees get their own
+     ports, databases, and container names.
      QUALITY BAR: an agent choosing where data lives, or checking what a function may not do,
-     finds the answer here — including "no store yet" stated explicitly. -->
+     finds the answer here — including "no store yet" stated explicitly — and an agent in a new
+     worktree or a cloud session knows where its variables come from. -->
 
 ## Change delivery
 

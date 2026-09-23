@@ -18,7 +18,7 @@
 		"zod": "^4.6.5"
 	},
 	"version": "0.6.0",
-	"description": "The tenets engineering ruleset as an agent skill: 17 rules, routing index, project-guide template, and setup commands.",
+	"description": "The tenets engineering ruleset as an agent skill: 18 rules, routing index, project-guide template, and setup commands.",
 	"files": [
 		"skills",
 		"README.md"
