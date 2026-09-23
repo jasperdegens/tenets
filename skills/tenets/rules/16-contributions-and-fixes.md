@@ -1,99 +1,72 @@
 # 16 Contributions and Fixes
 
-A change is finished when a stranger can read, from the merged commit alone, why it exists, what it
-proved, and what it left open. Rules 01–05 say what code, tests, and docs must be, and Rule 11 how
-commits land; this rule says how a change is investigated, scoped, proved, written up, and closed.
+A merged commit must tell a stranger why the change exists, what it proved, and what remains.
 
 ## 16.1 Before Touching Code
 
-- Start from the current base branch: fetch, then check whether the report is already fixed or in
-  flight — a second fix of the same defect is a defect (Rule 15.4 applies at the start of work, not
-  only before landing).
-- Measure before theorizing. For a report from a live environment, read the records and telemetry
-  first — ids, timestamps, job rows, request logs. What cannot be read, say so, and name what would
-  settle it.
-- Separate what was seen from what is wrong. A report can describe correct behavior: say so on the
-  issue with the evidence, and close it with the finding, never for staleness.
-- Fix the mechanism, not the instance (Rule 10.2). When the report points at one throw, ask what let
-  a throw there become that symptom, and fix that.
+- Start from the current base; check whether the defect is fixed or already in flight (Rule 15.4).
+- Measure before theorizing. Inspect available records and telemetry; name missing evidence and what
+  would settle the question.
+- Separate the symptom from the fault. If behavior is correct, close the report with evidence, not
+  for staleness.
+- Fix the mechanism that caused the symptom, not its single instance (Rule 10.2).
 
 ## 16.2 Scope
 
-- One defect per change (Rule 11.1). An unrelated finding becomes its own change, marked "Not tied
-  to an open issue", or an inbox entry (Rule 6.1).
-- The requested fix is the deliverable; never widen or narrow it quietly. A fix that changes what a
-  documented field, option, or state means says so under "For the reviewer" and updates the
-  contract text and docs in the same change (Rule 5.5).
-- When two places compute the same fact — say, the code that enforces a limit and the page that
-  reports it — compute it once and have both read the result. If they disagree, that is a defect in
-  itself (Rule 5.5).
-- Words a person reads are part of the fix. A failure message names what was measured, what would
-  have passed, and what to do next — never an environment variable's name or a bare code (Rule
-  11.4). A status badge says why it shows that state, and anything the system refuses says what
-  would make it accept.
+- One defect per change; move unrelated findings to another change or the inbox (Rules 11.1, 6.1).
+- Do not change scope silently. Update and call out any changed contract (Rule 5.5).
+- Compute a fact once when both behavior and UI/docs report it.
+- User-facing errors state what failed, what passes, and the next action—not an internal name or
+  bare code (Rule 11.4).
 
 ## 16.3 Proof
 
-- Build tests from the observed case's own numbers; for a report, the reproduction is the first
-  test.
-- Show each new test failing against the unfixed behavior and say so in the write-up. An assertion
-  nobody has seen fail is a hypothesis (Rule 4.2).
-- Try a user-facing change before and after, on the screen or output the user sees, against the
-  fixtures the project guide names, and add or adjust a fixture so that state stays visible there
-  afterwards. The reviewer sees the "after" as Rule 17.2's screenshot.
-- Run the project guide's acceptance gate for the touched layers, and any generation step until its
-  diff is clean; whatever was omitted lands under the write-up's "Not run" (Rules 4.8, 16.5).
+- Make the observed case the first test, using its real values.
+- See each new test fail for the defect before fixing it; record that proof (Rule 4.2).
+- Exercise user-facing changes before and after with the named fixtures; provide Rule 17.2's visual
+  proof when applicable.
+- Run the guide's affected acceptance gate and generators; list omissions under `Not run` (Rule
+  4.8).
 
 ## 16.4 Branches and Titles
 
-Branch names carry a kind prefix — `fix/`, `feat/`, `ops/`, or `chore/` unless the project guide's
-Change delivery slot says otherwise — and a short kebab-case description of the outcome.
-
-A title is one plain sentence naming what the user gets after the change, in the product's words:
-no type prefixes, no ticket codes, no mechanism.
+Unless the guide differs, branches use `fix/`, `feat/`, `ops/`, or `chore/` plus a short kebab-case
+outcome. The title is one plain sentence describing the user outcome in product language—no type
+prefix, ticket code, or mechanism.
 
 Bad: `fix(billing): null check on invoice total`
 Good: `An invoice with no lines totals zero instead of failing to render`
 
-Deliberate calibration: Rule 11.2's imperative mood governs branch commits, which record actions
-taken. The title, which becomes the merged commit's subject under squash merging, is what a reader
-scans to learn what changed, so it states the outcome.
+Rule 11.2's imperative applies to commits; a squash title states the outcome readers will scan.
 
 ## 16.5 The Write-Up
 
-The pull request body is the change's record and, where the project squash-merges, the merged
-commit's message, so it must stand alone in the log. Its shape:
+The pull request body must stand alone as the change record:
 
 ```text
 Fixes #123.            (or: Relevant to #123, though not a claim about which fault was hit)
 
-**What was reported.**  The symptom in the reporter's terms, with ids and times.
+**What was reported.**  The observed symptom and identifying evidence.
 **Why.**                The boundary that decided the behavior, and what it assumed.
 **The change.**         What moved, and what deliberately did not.
-Before and after, or the measured numbers, in a fenced block.
+**Evidence.**           Before and after, or measured values.
 **Tests.**              What each proves, and which fail without the change.
 **For the reviewer.**   Semantic changes, trade-offs, rollout or migration notes.
 **Still open.**         What was found and left alone, and what would settle it.
-Verified: commands and checks run, plus the screenshot or URL Rule 17 owes. Not run: what, and why.
+**Verified.**           Commands plus any Rule 17 artifact.
+**Not run.**            Omitted checks and why.
 ```
 
-- Paragraphs open with a bold lead-in and state facts and consequences, not the story of the
-  investigation.
-- Numbers are measured and quoted, never estimated in prose. Quote ids and counts; never
-  credentials, tokens, or personal data.
-- "Fixes #N" only when the change removes the reported cause. Otherwise "Relevant to #N", plus what
-  remains unknown.
-- The comment at the site of the fix carries the issue number and what the defect looked like to
-  the person who hit it (Rule 5.3).
+State facts and consequences, not an investigation diary. Use measured values; never expose secrets
+or personal data. Use `Fixes #N` only when the cause is removed; otherwise use `Relevant to #N` and
+state what remains unknown. A necessary code comment explains the defect, not merely its issue
+number (Rule 5.3).
 
 ## 16.6 Closing the Loop
 
-- Answer on the issue in the write-up's terms: what was seen, what was wrong, what changed, and what
-  is still needed from the reporter. Ask for specific ids, timestamps, or screenshots, never "more
-  information".
-- Correct an earlier comment in the thread as plainly as the finding that replaces it.
-- Open the pull request as a draft until every claim in its verification line has been run. Ready
-  for review means the body is true.
+- Report what was observed, wrong, changed, and still needed. Ask for specific evidence, not "more
+  information"; plainly correct earlier claims.
+- Keep the pull request draft until its verification claims are true.
 - Tool attribution follows repository policy and never replaces the accountable author.
 
 ## 16.7 Review Rule
