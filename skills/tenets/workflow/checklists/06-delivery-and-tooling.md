@@ -40,7 +40,9 @@
   5.3)
 - Where a human eye is the check, is the evidence posted where the reviewer looks — never a local
   path — with the question it answers beside it, and failures shown the same way? (17.1)
-- Does a visible change carry a screenshot of the result at the viewports it affects? (17.2)
+- Does a visible change carry a screenshot of the result at the viewports it affects, sent in the
+  chat rather than committed — committed and linked by permalink only where the chat could not take
+  a file? (17.2)
 - Does anything running in a live system, including every live push, carry the URL the reviewer
   can open? (17.3)
 - Is anything that cannot run in the remote environment named in the plan's slice and under the

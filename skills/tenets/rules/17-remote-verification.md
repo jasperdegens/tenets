@@ -22,6 +22,12 @@ stated route. Capture with the harness's built-in browser when it has one, other
 browser — the project guide names the tool. A recording only when asked for; it costs far more than
 a still and rarely proves more.
 
+**Screenshots are sent in the chat, not committed.** Whenever the harness can attach a file to the
+chat the reviewer is following, the screenshot goes there and the write-up's verification line says
+so. Only when it cannot is the screenshot committed, and then linked to with a permalink the
+reviewer's device can open (17.3), in the chat and on that line. A committed image widens the diff
+under review and outlives the UI it shows.
+
 Deliberate calibration: the screenshot is the human gate for design intent, which no assertion can
 express. It never replaces behavioral tests (Rule 4) and is never a snapshot assertion (Rule 4.7).
 

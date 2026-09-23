@@ -61,13 +61,14 @@ Evidence is owed where a human eye is the check, not on every change: a screensh
 anything visible (taken with the harness's browser or a scripted one, recordings only on request),
 the URL the reviewer can open for anything running, including every push that lands somewhere live.
 Evidence is posted where the reviewer already looks with the question it answers beside it, never as
-a local path; failures are shown the same way. Work that cannot run in the provisioned remote
-environment is named in the plan's slice and the write-up's "Not run" rather than silently pushed
-back to a local machine. The screenshot is a human gate for design intent and never replaces
-behavioral tests. The project guide's Change delivery slot gains the verification surfaces (preview
-platform, URL patterns, screenshot tool, where evidence is posted); dimension 6 of the review
-checklist gains four questions; two routing scenarios cover the new row. The `tenets` skill moves to
-2.3.0.
+a local path; failures are shown the same way. Screenshots are sent in the chat the reviewer is
+following, not committed; only when the harness cannot attach a file there is one committed and
+linked by a permalink. Work that cannot run in the provisioned remote environment is named in the
+plan's slice and the write-up's "Not run" rather than silently pushed back to a local machine. The
+screenshot is a human gate for design intent and never replaces behavioral tests. The project
+guide's Change delivery slot gains the verification surfaces (preview platform, URL patterns,
+screenshot tool, where evidence is posted); dimension 6 of the review checklist gains four
+questions; two routing scenarios cover the new row. The `tenets` skill moves to 2.3.0.
 
 **Rules 16 and 17 cite each other.** They landed from separate branches and each restated the
 other's ground: the write-up's verification line said "Verified locally" while 17.4 forbids the
