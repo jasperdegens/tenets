@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+**Rules 16–18 are shorter without changing their anchors or requirements.** Repeated rationale,
+examples, and procedural wording now give way to direct instructions and existing cross-references.
+The three files drop from 2,138 to 1,102 words, and the complete ruleset from 8,268 to 7,232 words.
+
 **Rule 18 Environments and Worktrees** is new, with the worktree setup it calls for. Configuration
 reaches code only through the process environment: every variable is declared once, in the contract
 parsed at startup and in a committed example file (18.1); env files are a local convenience, loaded
