@@ -1,9 +1,9 @@
 # tenets
 
 A generic, distilled engineering ruleset for monorepos, packaged as an agent skill: 18
-language-neutral rules (~8,100 words) behind a trigger-routing index, a language profile that binds
-them to one ecosystem, one editable per-project translation file (the project guide), and two
-commands to create and audit it.
+language-neutral rules (~8,100 words) behind a trigger-routing index, profiles that bind them to one
+or more ecosystems, one editable per-project translation file (the project guide), and commands to
+create and audit it.
 
 Sources distilled: tiger-style, design-by-contract, railway-oriented programming and result types,
 Ousterhout's deep modules, behavioral TDD/BDD, DORA capabilities, DDIA-style data modeling,
@@ -34,9 +34,26 @@ otherwise not read it. Audit or upgrade later with `/tenets-check`.
 | `profiles/`   | one ecosystem's mechanisms             | when authoring one |
 | project guide | one repository's paths, commands, gate | per project       |
 
-A rule states the principle, the profile states the mechanism, the guide states the project's
-facts. Rules name the result type, the invariant assertion, and the doc, test, and packaging
-systems generically; the profile fixes the concrete names.
+A rule states the principle, each profile states the mechanisms for its ecosystem, and the guide
+states project facts. A project can select multiple profiles concurrently by path in `tenets.json`:
+
+```json
+{
+  "guide": "docs/project-guide.md",
+  "profiles": {
+    "typescript": ["apps/web/**", "apps/roblox-ts/**"],
+    "python": ["services/modal/**"],
+    "lua": ["game/**/*.luau"],
+    "rust": ["crates/**"]
+  }
+}
+```
+
+For a task, load each profile whose configured paths match the files in scope. Load all configured
+profiles when scope is cross-cutting or unknown. Existing single-profile projects retain the
+`profile` field as the fallback for paths not matched in `profiles`. Runtime distinctions
+within a language, such as roblox-ts and Vercel, belong in project guide path/runtime facts unless
+they change language-level mechanisms.
 
 ## Contract the project must satisfy
 
@@ -48,6 +65,20 @@ The TypeScript profile fixes these APIs (Rule 7.6):
 Ship those exact APIs in any package you like and name their location in the guide. This repository
 provides them as `@tenets/result` and `@tenets/invariant` under `packages/` — copy them in
 or depend on them directly.
+
+The [Python profile](profiles/python.md) binds the same contract to `Result[T, E]` /
+`ResultAsync[T, E]`, snake_case composition, and `invariant` / `InvariantError`, provided by
+`tenets-result` and `tenets-invariant` (`tenets_result` / `tenets_invariant` imports). Select
+`"profile": "python"` in `tenets.json`. It requires ty, defaults to uv/Ruff/pytest, and leaves the
+schema library to the guide.
+
+The [Lua/Luau profile](profiles/lua.md) uses synchronous tagged-table Results and invariant errors;
+the project guide records the dialect, runtime, module system, and async adapter. It applies to stock
+Lua and Roblox Luau while keeping their syntax and globals distinct.
+
+The [Rust profile](profiles/rust.md) uses `std::result::Result` and `assert!` directly, with Cargo,
+rustfmt, Clippy, and Cargo's built-in test and doctest support. It does not require custom primitive
+crates; the guide records the toolchain, MSRV, targets, and workspace details.
 
 ## Authoring a profile
 
@@ -62,14 +93,16 @@ A profile is one file under `profiles/`, ~500 words, with three powers and no ot
   stay citable in every ecosystem.
 
 Never contradict a rule's intent, and never restate a project's paths or commands — those are the
-guide's job. Set `tenets.json`'s `profile` field to the file's name; `typescript` is the default.
+guide's job. Set `tenets.json`'s legacy `profile` field for one profile (`typescript` is the default)
+or use its `profiles` map to associate profile names with repository-relative path globs.
 
 ## Layout
 
 - `SKILL.md` — the routing index; loads on trigger, points to one rule file per situation.
 - `rules/` — 18 rule files, stable section anchors (`Rule 4.3`); anchors never renumber.
-- `profiles/` — one file per language/ecosystem; `typescript.md` ships, and the profile loads with
-  the rules.
+- `profiles/` — one file per language/ecosystem; `typescript.md`, `python.md`, `lua.md`, and
+  `rust.md` ship.
+  Load every selected profile that applies to the task's paths.
 - `templates/project-guide.md` — the editable translation template (WHAT/WHY/QUALITY BAR per slot).
 - `templates/worktree-setup.sh` — the one command that makes a new worktree or fresh clone runnable
   (Rule 18.4); `/tenets-init` offers to copy it into a repository's scripts.

@@ -1,10 +1,10 @@
 # tenets
 
 An engineering standard for coding agents, distilled from the canon and packaged as installable
-skills: **18 language-neutral rules behind a trigger-routing index, a language profile that binds
-them to one ecosystem, one editable per-project file, six commands that apply the rules to real
-code, the primitives the TypeScript profile requires, and an eval suite** that measures whether
-agents actually load and follow the rules.
+skills: **18 language-neutral rules behind a trigger-routing index, profiles that bind them to one
+or more ecosystems, one editable per-project file, six commands that apply the rules to real code,
+TypeScript, Python, and Lua/Luau primitives, Rust's standard-library equivalents, and an eval
+suite** that measures whether agents actually load and follow the rules.
 
 An agent will be exactly as good an engineer as the standard you managed to articulate — not as good
 as your best day, and not as good as your intentions, but as good as the sentences you actually
@@ -95,7 +95,7 @@ never compete with the ruleset for activation during ordinary work. That is also
 mandate names them: naming is what makes them discoverable.
 
 During ordinary work agents follow the **loading protocol**: match the task against the index, read
-every matched rule file plus the language profile, and open the response with `Rules: <numbers|none>`
+every matched rule file plus every applicable language profile, and open the response with `Rules: <numbers|none>`
 — with an explicit statement that brevity and minimalism instructions govern prose, never the
 protocol. Teams wanting a hard per-prompt guarantee can add an opt-in hook, documented in
 [the ruleset's README](skills/tenets/README.md).
@@ -161,26 +161,78 @@ mandate has to reach every harness through a file it loads on every prompt: `AGE
 imported into `CLAUDE.md` where Claude Code would otherwise skip it, and pointed at from `GEMINI.md`
 for Gemini CLI.
 
+## Mixed-language profiles
+
+Single-language projects keep the `profile` field. Mixed-language projects map profile names to
+repository-relative globs in `profiles`; tasks load all profiles matching their file scope, or every
+configured profile when the scope is cross-cutting or unknown:
+
+```json
+{
+  "guide": "docs/project-guide.md",
+  "profiles": {
+    "typescript": ["apps/roblox-ts/**", "apps/web/**"],
+    "python": ["services/modal/**"],
+    "lua": ["game/**/*.luau"],
+    "rust": ["crates/**"]
+  }
+}
+```
+
+The [Python profile](skills/tenets/profiles/python.md) uses ty for static types, uv/Ruff/pytest
+defaults (documented deviations allowed), and a configurable boundary schema library. The
+[Lua/Luau profile](skills/tenets/profiles/lua.md) records strict Luau typing, Lua/Luau dialect
+boundaries, and a synchronous Result API. The [Rust profile](skills/tenets/profiles/rust.md) uses
+the standard library's `Result` and `assert!`, with Cargo, rustfmt, and Clippy defaults. The project
+guide supplies runtime-specific details such as roblox-ts, Vercel, Modal, and Rust workspace paths
+and commands.
+
 ## The primitive packages
 
-The TypeScript profile fixes one API surface (Rule 7.6); everything else is configurable. This repo
-ships it:
+Each profile fixes its API surface (Rule 7.6); the guide names where that surface lives. This repo
+ships [TypeScript](skills/tenets/profiles/typescript.md), [Python](skills/tenets/profiles/python.md),
+[Lua/Luau](skills/tenets/profiles/lua.md), and [Rust](skills/tenets/profiles/rust.md) profiles with
+their matching primitives. Rust uses standard-library primitives and needs no Tenets Rust package:
 
-- [`@tenets/result`](packages/result) — `Result<T, E>` / `ResultAsync<T, E>`, `ok`, `err`,
+- [`@tenets/result`](packages/result-ts) — `Result<T, E>` / `ResultAsync<T, E>`, `ok`, `err`,
   `map`/`mapErr`/`andThen`/`match`/`unwrapOr`/`combine`, `trySync`/`tryAsync`. Frozen variants,
   thenable async composition, dependency-free.
-- [`@tenets/invariant`](packages/invariant) — `invariant()` throwing `InvariantError` with stable
+- [`@tenets/invariant`](packages/invariant-ts) — `invariant()` throwing `InvariantError` with stable
   metadata, plus `createInvariant` for production message stripping.
 - [`@tenets/env`](packages/env) — composable typed environment contracts on Zod 4.6 (Rule 2.1's
   boundary layer): server/client partitions, deployed-environment rules, a Next.js adapter, and a
   cached schema per contract (~30× faster steady-state than rebuilding it per parse).
+- [`tenets-result`](packages/result-py) — Python `Result` / `ResultAsync`, frozen typed variants,
+  synchronous and async composition, zero runtime dependencies.
+- [`tenets-invariant`](packages/invariant-py) — Python assertions, metadata, and production
+  diagnostic stripping, zero runtime dependencies.
+- [`tenets-result-lua`](packages/result-lua) and [`tenets-invariant-lua`](packages/invariant-lua) —
+  LuaRocks/Wally modules with synchronous tagged Results and invariant metadata; zero runtime
+  dependencies. Their `@rbxts/` npm packages pair native `.lua` entrypoints with declarations for
+  roblox-ts consumers.
 
 ```sh
 npm install @tenets/result @tenets/invariant
+# Python 3.10+:
+python -m pip install tenets-result tenets-invariant
 ```
 
-Each release also attaches packed tarballs for registry-free installs, and `packages/*` can be
+TypeScript releases also attach npm tarballs for registry-free installs. Package sources can be
 copied into a workspace directly. Your project guide records the location either way.
+
+Python package validation (install local sources with
+`python -m pip install ./packages/result-py ./packages/invariant-py`):
+
+| Command | Purpose |
+| --- | --- |
+| `python -m unittest discover -s packages/invariant-py/tests` | Invariant behavior |
+| `python -m unittest discover -s packages/result-py/tests` | Sync and async Result behavior |
+| `python -O -m unittest discover -s packages/invariant-py/tests` | Always-on assertions under optimization |
+| `python -m mypy` | Strict public API and consumer typing contracts (install `mypy` first) |
+| `python -m build packages/invariant-py` / `python -m build packages/result-py` | Wheels and source distributions (install `build` first) |
+
+CI tests installed wheels on Python 3.10–3.14. Build and type-check tools are
+development dependencies; both packages have zero runtime dependencies.
 
 ## Evals
 
@@ -198,8 +250,9 @@ Three suites, each scenario a fresh non-interactive session:
 - `invocation.tsv` — **command routing**: explicit phrasings must reach the named workflow skill, and
   adversarial near-misses must reach none.
 
-Latest results (`evals/v040/SUMMARY.md`): routing **20/20** with zero workflow-skill hijacks,
-abidance **7/7**, command routing **16/16**. Run all three before releasing any change to a
+Latest release checks ([0.7.0 report](evals/v070/SUMMARY.md)): routing **20/22**,
+abidance **6/7**, command routing **14/16**. The report records baseline comparisons, an unresolved
+routing finding, and scorer limitations. Run all three before releasing any change to a
 description, the index, or a skill body — a ten-word edit has moved results before. Requires an
 authenticated `claude` CLI; runs cost real tokens.
 
@@ -209,13 +262,15 @@ authenticated `claude` CLI; runs cost real tokens.
 | --- | --- |
 | `skills/tenets/SKILL.md` | Routing index, loading protocol, guide and profile discovery |
 | `skills/tenets/rules/` | The 18 rule files |
-| `skills/tenets/profiles/` | Language profiles; `typescript.md` ships |
+| `skills/tenets/profiles/` | Language profiles: TypeScript, Python, Lua/Luau, and Rust |
 | `skills/tenets/templates/` | Project-guide template (WHAT / WHY / QUALITY BAR per slot) and the worktree setup script |
 | `skills/tenets/workflow/` | Shared contracts for the workflow skills: findings, scope, checklists |
 | `skills/tenets-audit`, `-review`, `-plan`, `-realign` | The four workflow commands |
 | `skills/tenets-init`, `-check` | Setup and guide audit, plus the per-harness shim templates |
 | `skills/tenets-*/agents/openai.yaml` | Codex's per-skill invocation policy, mirroring `disable-model-invocation` |
-| `packages/result`, `packages/invariant`, `packages/env` | The primitives and the env boundary layer (93 specs) |
+| `packages/result-ts`, `packages/invariant-ts`, `packages/env` | TypeScript primitives and the env boundary layer |
+| `packages/result-py`, `packages/invariant-py` | Python primitives with behavioral parity tests |
+| `packages/result-lua`, `packages/invariant-lua` | Lua/Luau primitives with roblox-ts typings |
 | `docs/` | Motivation, design, authoring, patterns, how-to guides |
 | `evals/` | Eval runner, three scenario suites, recorded results |
 | `test/` | Behavioral tests for the shipped templates — not installed with the skills |
