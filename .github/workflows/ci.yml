@@ -17,9 +17,10 @@ jobs:
         with:
           node-version: 24
       - run: npm ci
+      # The Lua packages' roblox-ts typings resolve from their built out/ directories.
+      - run: npm run build --workspaces
       - run: npm run typecheck
       - run: npm test
-      - run: npm run build --workspaces
       - run: npm pack --dry-run --workspaces
       # ESM packaging smoke: every package's built entry must import under plain Node.
       - run: |

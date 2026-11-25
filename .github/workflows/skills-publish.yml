@@ -22,6 +22,7 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - run: npm ci
+      - run: npm run build --workspaces
       - run: npm run typecheck
       - run: npm test
       - run: npm pack --dry-run
