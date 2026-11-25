@@ -1,6 +1,13 @@
 node_modules/
 dist/
+packages/result-lua/out/
+packages/invariant-lua/out/
 evals/raw-*.jsonl
 evals/results.txt
 evals/baseline/
 evals/v040/raw-*.jsonl
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+*.egg-info/

@@ -5,7 +5,8 @@ states the mechanism, the project guide states the project's paths and commands.
 rule terms to real names, append ecosystem rules, and waive a rule anchor with a stated reason; it
 never contradicts a rule's intent.
 
-Applies to: TypeScript and JavaScript, including Node.js and browser targets.
+Applies to: TypeScript and JavaScript, including Node.js and browser targets. For Roblox projects
+using roblox-ts, also read the Roblox target guidance below and follow the project guide's path map.
 
 ## Primitives (Rule 7.6)
 
@@ -135,6 +136,14 @@ themselves; plain Node takes `--env-file-if-exists=.env.local` at the process bo
 loader imported by library code. Anything behind `NEXT_PUBLIC_`, `VITE_`, or `PUBLIC_` is compiled
 into the client bundle. The setup command installs with the lockfile-exact form: `npm ci`,
 `pnpm install --frozen-lockfile`, `yarn install --immutable`, or `bun install --frozen-lockfile`.
+
+## Roblox target (roblox-ts)
+
+roblox-ts translates TypeScript source to Luau. Treat it as a distinct runtime target: do not infer
+Node.js or browser APIs from `.ts` alone. The project guide records compiler and transformer versions,
+Roblox type packages, module/build mappings, and which generated Lua/Luau paths are in scope. Apply
+the Lua/Luau profile to those generated or hand-written runtime modules. Follow the official
+[roblox-ts documentation](https://roblox-ts.com/docs/) for compiler and target-specific behavior.
 
 ## Waivers
 

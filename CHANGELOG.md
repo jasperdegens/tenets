@@ -1,6 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.10.0 — 2026-11-25
+
+**Brings in upstream 0.7.0–0.9.0.** This fork now carries BarakChamo/tenets through 0.9.0 — the
+Python, Lua/Luau and Rust profiles, path-scoped `profiles` maps in `tenets.json`, the renamed
+`packages/*-ts` directories, and the Python and Lua/Luau primitives — alongside Rules 16–18. Where
+both lines touched the same text, the rule counts read 18, install pointers name this fork, and
+`/tenets-init` keeps both the multi-profile detection and the AGENTS.md / worktree steps. The
+`tenets` skill moves to 2.6.0 and `@tenets/skills` to 0.10.0.
 
 **Rules 16–18 are shorter without changing their anchors or requirements.** Repeated rationale,
 examples, and procedural wording now give way to direct instructions and existing cross-references.
@@ -115,6 +122,32 @@ cannot run remotely, which gives 17.4's plan flag a place to land. The plan temp
 question for 17.4 follow; Dimension 6's header and the dimension table in `workflow/scope.md` now
 name Rule 17, which they had omitted since it landed. Abidance scenario A08 expects "Verified"
 rather than "Verified locally". No anchor moves.
+
+## 0.9.0 — 2026-10-22
+
+- Publish the Rust engineering profile, including Rust's standard `Result`, invariant handling,
+  ownership and safety guidance, and Cargo/rustfmt/Clippy/test defaults.
+- Include multi-profile path selection and the Lua/Luau profile and utilities in the skill package.
+
+## 0.8.0 — 2026-10-21
+
+- Add concurrent path-scoped profile selection and Lua/Luau plus Rust profiles. Lua/Luau packages
+  provide native Result and invariant utilities for stock Lua, Luau, and roblox-ts; the Rust profile
+  uses `std::result::Result` and `assert!` with Cargo, rustfmt, Clippy, and built-in test/doctest
+  defaults.
+- Advance the core `tenets` skill metadata to 2.5.0. Package native roblox-ts entrypoints as
+  `@rbxts/tenets-result-lua@0.1.0` and `@rbxts/tenets-invariant-lua@0.1.0`.
+
+## 0.7.0 — 2026-10-01
+
+- Rename TypeScript primitive directories to `packages/invariant-ts` and `packages/result-ts`,
+  preserving the published `@tenets/invariant` and `@tenets/result` names.
+- Add zero-runtime-dependency Python 3.10+ `tenets-invariant` and `tenets-result` packages,
+  typed APIs, ported behavioral tests, async composition, and packaging validation.
+  Add the Python engineering profile with ty, uv/Ruff/pytest defaults, configurable schemas,
+  and explicit Python package-boundary and cancellation semantics.
+
+`@tenets/skills` is at 0.7.0; the core `tenets` skill is at 2.3.0. Primitive packages remain at 0.6.0.
 
 ## 0.6.0 — 2026-09-17
 
