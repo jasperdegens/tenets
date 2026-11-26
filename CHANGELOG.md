@@ -9,6 +9,12 @@ both lines touched the same text, the rule counts read 18, install pointers name
 `/tenets-init` keeps both the multi-profile detection and the AGENTS.md / worktree steps. The
 `tenets` skill moves to 2.6.0 and `@tenets/skills` to 0.10.0.
 
+**Releases cut themselves.** A push to `main` whose `package.json` version has no tag yet creates
+that `v<version>` tag and GitHub release, with this file's section for the version as its notes, and
+attaches the packed packages; a version with no CHANGELOG section fails the job instead. npm
+publishing no longer runs on a release — it stays manual until the packages move to an npm scope
+this fork controls.
+
 **Rules 16–18 are shorter without changing their anchors or requirements.** Repeated rationale,
 examples, and procedural wording now give way to direct instructions and existing cross-references.
 The three files drop from 2,138 to 1,102 words, and the complete ruleset from 8,268 to 7,232 words.
