@@ -3,6 +3,12 @@ name: Publish
 on:
   release:
     types: [published]
+  # release.yml calls this directly: a release created with GITHUB_TOKEN triggers no workflows.
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
 
 permissions:
   contents: write # upload release assets
@@ -22,7 +28,7 @@ jobs:
       - run: gh release upload "$TAG" ./*.tgz --clobber
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ inputs.tag || github.event.release.tag_name }}
 
   # npm publishing (registry) can be added back once an NPM_TOKEN secret exists:
   # npm publish --workspaces --access public with registry-url + NODE_AUTH_TOKEN.

@@ -5,9 +5,8 @@ name: Publish to npm
 # Publisher -> GitHub Actions: BarakChamo/tenets, workflow npm-publish.yml),
 # then delete the secret and the NODE_AUTH_TOKEN env line — OIDC takes over
 # and provenance is generated automatically.
+# Manual only until the packages move to an npm scope this fork controls and NPM_TOKEN exists.
 on:
-  release:
-    types: [published]
   workflow_dispatch:
 
 permissions:
